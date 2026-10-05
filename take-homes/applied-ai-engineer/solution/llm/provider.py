@@ -130,6 +130,28 @@ class RecordingProvider:
         return response
 
 
+@dataclass
+class ChainProvider:
+    """Try `primary`, fall back to `fallback` on a replay miss.
+
+    Used for the full-corpus artifact run: the 15 calls with authored
+    fixtures answer at fixture fidelity, and the 125 holdout calls fall
+    through to the heuristic baseline rather than erroring out. Every
+    response records which arm served it, so the committed artifact can be
+    split by provenance instead of presenting one blended number.
+    """
+
+    primary: LLMProvider
+    fallback: LLMProvider
+    name: str = "chain"
+
+    def complete(self, request: LLMRequest) -> LLMResponse:
+        try:
+            return self.primary.complete(request)
+        except ResponseNotRecorded:
+            return self.fallback.complete(request)
+
+
 # --- live --------------------------------------------------------------------
 
 
@@ -278,6 +300,19 @@ def build_provider(kind: str, *, record: bool = False, strict: bool = False) -> 
             return ReplayProvider(strict=strict)
         case "adversarial":
             return AdversarialProvider()
+        case "heuristic":
+            # Rule-based baseline so the full 140-call corpus can be processed
+            # with no API key. Deliberately NOT used for the dev-set score --
+            # see solution/llm/heuristic.py.
+            from .heuristic import HeuristicProvider
+
+            return HeuristicProvider()
+        case "chain":
+            # Authored fixtures where they exist, heuristic everywhere else.
+            # This is what the full-corpus artifact run uses: the 15 dev calls
+            # get fixture fidelity, the 125 holdout calls get the baseline,
+            # and every transcript is processed either way.
+            return ChainProvider(primary=ReplayProvider(), fallback=build_provider("heuristic"))
         case "anthropic":
             live = AnthropicProvider()
             return RecordingProvider(inner=live) if record else live

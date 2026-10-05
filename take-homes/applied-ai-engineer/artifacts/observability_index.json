@@ -1,0 +1,31 @@
+{
+  "what_this_proves": "Every decision in the run emitted a structured event with a closed-enum reason, so drop-reason drift is queryable and a silent stop is distinguishable from a clean month.",
+  "total_events": 385,
+  "event_counts_by_stage_and_reason": {
+    "gate.dropped_unactionable_vague": 149,
+    "extract.extracted": 134,
+    "gate.passed": 23,
+    "dedup.file-new": 18,
+    "gate.dropped_customer_side_root_cause": 11,
+    "gate.dropped_retracted_on_call": 8,
+    "gate.dropped_resolved_on_call": 7,
+    "gate.dropped_internal_only_call": 6,
+    "gate.dropped_hearsay": 5,
+    "ingest.injection_detected": 4,
+    "dedup.corroborate": 4,
+    "gate.dropped_cosmetic_preference": 3,
+    "gate.dropped_not_a_product_issue": 3,
+    "gate.dropped_customer_declined_filing": 2,
+    "gate.dropped_injection_quarantined": 2,
+    "run.run_started": 1,
+    "ingest.suppression_detected": 1,
+    "dedup.already-shipped": 1,
+    "cluster.clustered": 1,
+    "cluster.merged": 1,
+    "run.run_finished": 1
+  },
+  "how_to_detect_silent_stop": "candidates_per_call below HEALTH_MIN_CANDIDATES_PER_CALL (0.30) raises a HIGH alert and the CLI exits non-zero. A run that files nothing is as alarming as one that files sixty.",
+  "how_to_detect_silent_misfiling": "file_rate above HEALTH_MAX_FILE_RATE (0.60), or a collapse in gate.dropped_* counts, means the gates stopped filtering.",
+  "how_to_detect_a_hallucinated_citation": "grep for gate.dropped_evidence_not_found; the detail field names the cited turn and the transcript length.",
+  "how_to_distinguish_a_miss_from_a_bad_grader": "eval.json reports expected vs actual action sets per call with no judge model involved, so a disagreement is read directly off the two sets."
+}

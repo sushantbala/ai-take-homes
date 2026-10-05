@@ -85,10 +85,17 @@ class RunLogger:
         self.event("gate", f"dropped_{reason}", call_id=call_id, **fields)
 
     def error(self, call_id: str, exc: BaseException, stage: str) -> None:
-        """Record a per-transcript failure without aborting the run."""
+        """Record a per-transcript failure without aborting the run.
+
+        The `failed_stage` key is deliberately not called `stage`: splatting a
+        dict containing `stage` into `event(stage, reason, **fields)` collides
+        on that parameter and raises TypeError. That turned the one code path
+        whose entire job is to contain a failure into the path that crashed
+        the whole run, and it was invisible until a transcript actually failed.
+        """
         entry = {
             "call_id": call_id,
-            "stage": stage,
+            "failed_stage": stage,
             "error_type": type(exc).__name__,
             "error": str(exc)[:500],
         }

@@ -31,7 +31,7 @@ def main(argv: list[str] | None = None) -> int:
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_run = sub.add_parser("run", help="process transcripts and build the review queue")
-    p_run.add_argument("--provider", default="replay", choices=["replay", "anthropic", "adversarial"])
+    p_run.add_argument("--provider", default="replay", choices=["replay", "chain", "heuristic", "anthropic", "adversarial"])
     p_run.add_argument("--record", action="store_true", help="persist live responses as fixtures")
     p_run.add_argument("--only", nargs="*", help="limit to specific call ids, e.g. call-001 call-006")
     p_run.add_argument("--dev", action="store_true", help="shorthand for the labelled dev set, calls 001-015")
@@ -53,7 +53,7 @@ def main(argv: list[str] | None = None) -> int:
     p_apply.add_argument("--dry-run", action="store_true")
 
     p_eval = sub.add_parser("eval", help="score against data/dev_labels.json")
-    p_eval.add_argument("--provider", default="replay", choices=["replay", "anthropic", "adversarial"])
+    p_eval.add_argument("--provider", default="replay", choices=["replay", "chain", "heuristic", "anthropic", "adversarial"])
     p_eval.add_argument("--runs", type=int, default=1, help="repeat N times and report per-case pass rate")
     p_eval.add_argument("--json", action="store_true")
 

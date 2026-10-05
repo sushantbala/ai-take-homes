@@ -1,0 +1,64 @@
+{
+  "what_this_proves": "Running twice over the same transcripts creates no duplicate tickets and no duplicate notifications. Proven at the outbox, which is the only thing that matters -- the stubs de-duplicate nothing.",
+  "run_1": {
+    "candidates_extracted": 213,
+    "actions_proposed": 22
+  },
+  "apply_1": {
+    "filed": 17,
+    "notified": 22,
+    "skipped": 0,
+    "rejected": 0,
+    "pending": 0
+  },
+  "run_2_forced_reprocess": {
+    "note": "force=True, so every transcript was re-extracted and re-gated from scratch.",
+    "transcripts_processed": 134,
+    "candidates_extracted": 213,
+    "actions_newly_proposed": 0,
+    "actions_suppressed_as_duplicate": 22
+  },
+  "apply_2": {
+    "filed": 0,
+    "notified": 0,
+    "skipped": 0,
+    "rejected": 0,
+    "pending": 0
+  },
+  "run_3_unchanged_content": {
+    "note": "Without force, the content-hash check skips work entirely.",
+    "transcripts_processed": 0,
+    "transcripts_unchanged": 134,
+    "actions_newly_proposed": 0
+  },
+  "outbox_line_counts": {
+    "before_any_apply": {
+      "jira": 0,
+      "slack": 0
+    },
+    "after_apply_1": {
+      "jira": 17,
+      "slack": 22
+    },
+    "after_apply_2_following_forced_rerun": {
+      "jira": 17,
+      "slack": 22
+    },
+    "delta": {
+      "jira": 0,
+      "slack": 0
+    }
+  },
+  "verdict": "PASS: zero second writes",
+  "ledger_state": {
+    "issues": 22,
+    "filed": 22,
+    "proposed": 0,
+    "rejected": 0,
+    "sources": 23,
+    "notifications": 22,
+    "transcripts_ok": 134,
+    "transcripts_error": 0,
+    "pending_writes": 0
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "what_this_proves": "A transcript that fails to parse is isolated: it is recorded as an error on its own ledger row for retry on the next run, and every other transcript completes normally.",
+  "method": "call-070.md was replaced with a malformed copy containing a dialogue line with no [EXTERNAL]/[INTERNAL] speaker tag. The other 139 files were untouched.",
+  "transcripts_found": 140,
+  "transcripts_processed": 133,
+  "transcripts_skipped_internal_only": 6,
+  "transcripts_errored": 1,
+  "errored_call_ids": [
+    "call-070"
+  ],
+  "error_detail": 0.0071,
+  "actions_still_proposed": 22,
+  "neighbours_unaffected": true,
+  "verdict": "PASS: exactly 1 transcript errored, 139 completed, run still produced actions",
+  "retry_behaviour": "Ledger.transcript_unchanged() returns False for a row with status='error', so the failed transcript is retried on the next run while the 139 successful ones are skipped by content hash."
+}

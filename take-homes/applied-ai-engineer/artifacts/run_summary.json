@@ -1,0 +1,30 @@
+{
+  "run_id": "artifact-digest",
+  "transcripts_seen": 140,
+  "transcripts_processed": 134,
+  "transcripts_skipped_internal": 6,
+  "transcripts_unchanged": 0,
+  "transcripts_errored": 0,
+  "error_rate": 0.0,
+  "candidates_extracted": 213,
+  "candidates_dropped": 190,
+  "candidates_per_call": 1.59,
+  "actions_file_new": 17,
+  "actions_corroborate": 4,
+  "actions_already_shipped": 1,
+  "actions_suppressed_idempotent": 0,
+  "file_rate": 0.1269,
+  "drop_reasons": {
+    "cosmetic_preference": 3,
+    "customer_declined_filing": 2,
+    "customer_side_root_cause": 11,
+    "hearsay": 5,
+    "injection_quarantined": 2,
+    "internal_only_call": 6,
+    "not_a_product_issue": 3,
+    "resolved_on_call": 7,
+    "retracted_on_call": 8,
+    "unactionable_vague": 149
+  },
+  "health_alerts": []
+}

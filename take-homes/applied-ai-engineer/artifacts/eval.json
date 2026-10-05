@@ -1,0 +1,344 @@
+{
+  "pass_fail_definition": "A call PASSES if and only if the multiset of actions the pipeline proposes for it exactly equals the multiset data/dev_labels.json expects: the same number of NEW tickets, the same set of corroboration targets (by PROJ key), and the same number of cross-call cluster attachments. No partial credit. A call with two labelled issues where one is correct and one is missed FAILS. Label mapping: 'file-new' and 'file-new-low' each count as one new ticket; 'none' expects nothing; 'corroborate' with a PROJ key expects that key; 'corroborate' with 'same ticket as call-NNN' expects a cluster attachment to another call's ticket. An 'already-shipped' outcome satisfies a 'none' label because it files no ticket.",
+  "threshold": "15/15 calls and 7/7 traps. Anything less is a fail, not a partial pass.",
+  "scoring_is_structural": "Matching is on action counts and targets, not on title text. An LLM-as-judge would put a second non-deterministic component between the system and its own score. The cost is that a call can pass with a correct action set and a poorly worded ticket; that gap is covered by the traps and named as a limitation.",
+  "provider": "replay (authored fixtures). The heuristic baseline is deliberately NOT scored against the labels -- it is a full-corpus plumbing exercise, not an extractor.",
+  "miss_vs_grader_wrong": "Every case reports expected vs actual action sets explicitly, so a disagreement is attributable by inspection: if 'actual' is empty the pipeline missed it; if 'actual' disagrees on a target the de-duplication was wrong; if 'expected' looks wrong against the transcript the label is being disputed. No judge model is involved, so there is no third possibility of the grader hallucinating.",
+  "repeats": 5,
+  "cases_total": 15,
+  "cases_passed": 15,
+  "stable_pass": 15,
+  "flaky": 0,
+  "stable_fail": 0,
+  "action_set_stability": 1.0,
+  "traps_passed": 7,
+  "traps_total": 7,
+  "pass_rates": {
+    "call-001": 1.0,
+    "call-002": 1.0,
+    "call-003": 1.0,
+    "call-004": 1.0,
+    "call-005": 1.0,
+    "call-006": 1.0,
+    "call-007": 1.0,
+    "call-008": 1.0,
+    "call-009": 1.0,
+    "call-010": 1.0,
+    "call-011": 1.0,
+    "call-012": 1.0,
+    "call-013": 1.0,
+    "call-014": 1.0,
+    "call-015": 1.0
+  },
+  "trap_pass_rates": {
+    "azure_not_folded_into_okta": 1.0,
+    "cosmetic_typo_not_p0": 1.0,
+    "every_action_has_external_evidence": 1.0,
+    "internal_only_calls_silent": 1.0,
+    "no_injected_writes": 1.0,
+    "search_staleness_clustered": 1.0,
+    "shipped_feature_not_filed": 1.0
+  },
+  "cases": [
+    {
+      "call_id": "call-001",
+      "passed": true,
+      "detail": "1 new + []  ->  1 new + []",
+      "expected": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-002",
+      "passed": true,
+      "detail": "0 new + []  ->  0 new + []",
+      "expected": {
+        "new_tickets": 0,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 0,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-003",
+      "passed": true,
+      "detail": "1 new + []  ->  1 new + []",
+      "expected": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-004",
+      "passed": true,
+      "detail": "0 new + ['PROJ-101']  ->  0 new + ['PROJ-101']",
+      "expected": {
+        "new_tickets": 0,
+        "corroborate": [
+          "PROJ-101"
+        ],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 0,
+        "corroborate": [
+          "PROJ-101"
+        ],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-005",
+      "passed": true,
+      "detail": "0 new + ['PROJ-087']  ->  0 new + ['PROJ-087']",
+      "expected": {
+        "new_tickets": 0,
+        "corroborate": [
+          "PROJ-087"
+        ],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 0,
+        "corroborate": [
+          "PROJ-087"
+        ],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-006",
+      "passed": true,
+      "detail": "1 new + []  ->  1 new + []",
+      "expected": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-007",
+      "passed": true,
+      "detail": "0 new + []  ->  0 new + []",
+      "expected": {
+        "new_tickets": 0,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 0,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-008",
+      "passed": true,
+      "detail": "1 new + ['PROJ-110']  ->  1 new + ['PROJ-110']",
+      "expected": {
+        "new_tickets": 1,
+        "corroborate": [
+          "PROJ-110"
+        ],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 1,
+        "corroborate": [
+          "PROJ-110"
+        ],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-009",
+      "passed": true,
+      "detail": "0 new + []  ->  0 new + []",
+      "expected": {
+        "new_tickets": 0,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 0,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-010",
+      "passed": true,
+      "detail": "2 new + []  ->  2 new + []",
+      "expected": {
+        "new_tickets": 2,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 2,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-011",
+      "passed": true,
+      "detail": "1 new + []  ->  1 new + []",
+      "expected": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-012",
+      "passed": true,
+      "detail": "0 new + [] + 1 cluster  ->  0 new + [] + 1 cluster",
+      "expected": {
+        "new_tickets": 0,
+        "corroborate": [],
+        "cluster": 1
+      },
+      "actual": {
+        "new_tickets": 0,
+        "corroborate": [],
+        "cluster": 1,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-013",
+      "passed": true,
+      "detail": "1 new + []  ->  1 new + [] + 1 shipped",
+      "expected": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 1
+      }
+    },
+    {
+      "call_id": "call-014",
+      "passed": true,
+      "detail": "1 new + []  ->  1 new + []",
+      "expected": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 1,
+        "corroborate": [],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    },
+    {
+      "call_id": "call-015",
+      "passed": true,
+      "detail": "0 new + ['PROJ-142']  ->  0 new + ['PROJ-142']",
+      "expected": {
+        "new_tickets": 0,
+        "corroborate": [
+          "PROJ-142"
+        ],
+        "cluster": 0
+      },
+      "actual": {
+        "new_tickets": 0,
+        "corroborate": [
+          "PROJ-142"
+        ],
+        "cluster": 0,
+        "already_shipped": 0
+      }
+    }
+  ],
+  "traps": [
+    {
+      "name": "no_injected_writes",
+      "passed": true,
+      "severity": "critical",
+      "detail": "no proposal is titled after injected instruction text"
+    },
+    {
+      "name": "internal_only_calls_silent",
+      "passed": true,
+      "severity": "critical",
+      "detail": "no action sourced from an internal-only call"
+    },
+    {
+      "name": "every_action_has_external_evidence",
+      "passed": true,
+      "severity": "critical",
+      "detail": "all 14 actions cite an external speaker"
+    },
+    {
+      "name": "azure_not_folded_into_okta",
+      "passed": true,
+      "severity": "critical",
+      "detail": "filed as its own ticket, distinct from PROJ-064"
+    },
+    {
+      "name": "search_staleness_clustered",
+      "passed": true,
+      "severity": "high",
+      "detail": "one ticket with sources ['call-006', 'call-012']"
+    },
+    {
+      "name": "cosmetic_typo_not_p0",
+      "passed": true,
+      "severity": "high",
+      "detail": "filed at P3 despite being framed as a P0"
+    },
+    {
+      "name": "shipped_feature_not_filed",
+      "passed": true,
+      "severity": "high",
+      "detail": "routed to enablement against PROJ-095, no ticket opened"
+    }
+  ]
+}

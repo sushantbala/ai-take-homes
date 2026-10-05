@@ -1,8 +1,8 @@
 # Call-signal review queue
 
-Run `run-20261003T205200-426c00` - generated 2026-10-03T20:52:00.209926+00:00
+Run `artifact-digest` - generated 2026-10-05T18:57:54.086243+00:00
 
-**14 item(s) awaiting your decision.** Nothing has been written to Jira or Slack. Approve with:
+**22 item(s) awaiting your decision.** Nothing has been written to Jira or Slack. Approve with:
 
 ```bash
 python -m solution.cli decide --approve <fingerprint>     # or --reject
@@ -14,7 +14,7 @@ python -m solution.cli apply                              # write the approved o
 |---|---|
 | already-shipped | 1 |
 | corroborate | 4 |
-| file-new | 9 |
+| file-new | 17 |
 
 ---
 
@@ -430,7 +430,117 @@ _Filed from call transcript by the call-signal triage pipeline after human revie
 
 ---
 
-## 8. Search returns stale results for about ten minutes after a team rename or member move
+## 8. That's what's weird
+
+**FILE NEW TICKET** &nbsp;|&nbsp; `P2` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `scheduling` &nbsp;|&nbsp; `7bcfcea7e3395ab9`
+
+**What the customer said**
+
+> That's what's weird. Our Ping session lifetime is set to 12 hours, so I'd expect a re-auth prompt at 12 hours. The 24-hour lockout doesn't match any timeout we've configured anywhere. It's like BetterBark has its own 24-hour hard cap that fires independently and then poisons the account instead of just ending the session.
+>
+> -- **Susan**, Beaumont Insurance, 2026-06-18 - [`transcripts/call-088.md:26`](transcripts/call-088.md#L26)
+
+**Why this disposition**
+
+- Priority `P2`: shows incorrect data; wrong numbers leave the product and get reported onward
+- De-dup: checked `PROJ-064`, all distinct
+  - `PROJ-064` (SSO session expires earlier than the configured lifetime for...) - same area but trigger does not match (trigger 0.00, symptom 0.40)
+
+<details><summary>Full ticket body as it would be filed</summary>
+
+```
+h2. What's happening
+That's what's weird. Our Ping session lifetime is set to 12 hours, so I'd expect a re-
+auth prompt at 12 hours. The 24-hour lockout doesn't match any timeout we've configured
+anywhere. It's like BetterBark has its own 24-hour hard cap that fires independently and
+then poisons the account instead of just ending the session.
+
+h2. Details
+* *Trigger:* That's what's weird
+* *Symptom:* Our Ping session lifetime is set to 12 hours
+* *Scope:* reported by the external participant on this call
+* *Workaround:* none reported
+* *Component:* scheduling
+
+h2. Priority: P2
+shows incorrect data; wrong numbers leave the product and get reported onward
+_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._
+
+h2. Evidence
+_Verbatim from the call recording. Quotes are read from the transcript file, not generated._
+
+*Beaumont Insurance* -- Susan, 2026-06-18 ([call-088|transcripts/call-088.md])
+{quote}That's what's weird. Our Ping session lifetime is set to 12 hours, so I'd expect a re-auth prompt at 12 hours. The 24-hour lockout doesn't match any timeout we've configured anywhere. It's like BetterBark has its own 24-hour hard cap that fires independently and then poisons the account instead of just ending the session.{quote}
+_transcripts/call-088.md:26 (turn 22)_
+
+h2. De-duplication
+Checked against these tracked issues and judged distinct:
+* PROJ-064 -- SSO session expires earlier than the configured lifetime for Okta-federated users
+** same area but trigger does not match (trigger 0.00, symptom 0.40) (similarity 0.333, by structured)
+
+----
+_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-088.md_
+```
+
+</details>
+
+`approve 7bcfcea7e3395ab9` &nbsp; `reject 7bcfcea7e3395ab9`
+
+---
+
+## 9. CSV with a header row, comma-delimited, UTF-8, quoted strings. Boring and universal. My
+
+**FILE NEW TICKET** &nbsp;|&nbsp; `P2` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `exports` &nbsp;|&nbsp; `81d9886eda4764ca`
+
+**What the customer said**
+
+> CSV with a header row, comma-delimited, UTF-8, quoted strings. Boring and universal. My loader eats that without complaint. I'd want the schema stable — same columns, same order, every night — because if the columns shift, my ingestion breaks silently and I find out three days later when a report looks wrong.
+>
+> -- **Wade**, Bancroft Mills, 2026-06-25 - [`transcripts/call-107.md:41`](transcripts/call-107.md#L41)
+
+**Why this disposition**
+
+- Priority `P2`: shows incorrect data; wrong numbers leave the product and get reported onward
+- De-dup: no tracked issue in the same area
+
+<details><summary>Full ticket body as it would be filed</summary>
+
+```
+h2. What's happening
+CSV with a header row, comma-delimited, UTF-8, quoted strings. Boring and universal. My
+loader eats that without complaint. I'd want the schema stable — same columns, same
+order, every night — because if the columns shift, my ingestion breaks silently and I
+find out three days later when a report looks wrong.
+
+h2. Details
+* *Trigger:* CSV with a header row
+* *Symptom:* comma-delimited
+* *Scope:* reported by the external participant on this call
+* *Workaround:* none reported
+* *Component:* exports
+
+h2. Priority: P2
+shows incorrect data; wrong numbers leave the product and get reported onward
+_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._
+
+h2. Evidence
+_Verbatim from the call recording. Quotes are read from the transcript file, not generated._
+
+*Bancroft Mills* -- Wade, 2026-06-25 ([call-107|transcripts/call-107.md])
+{quote}CSV with a header row, comma-delimited, UTF-8, quoted strings. Boring and universal. My loader eats that without complaint. I'd want the schema stable — same columns, same order, every night — because if the columns shift, my ingestion breaks silently and I find out three days later when a report looks wrong.{quote}
+_transcripts/call-107.md:41 (turn 37)_
+
+----
+_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-107.md_
+```
+
+</details>
+
+`approve 81d9886eda4764ca` &nbsp; `reject 81d9886eda4764ca`
+
+---
+
+## 10. Search returns stale results for about ten minutes after a team rename or member move
 
 **FILE NEW TICKET** &nbsp;|&nbsp; `P2` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `search` &nbsp;|&nbsp; `9966207d38a0db1f`
 
@@ -515,7 +625,173 @@ _Filed from call transcript by the call-signal triage pipeline after human revie
 
 ---
 
-## 9. Azure AD users hit an infinite redirect loop after a password change
+## 11. Exactly that. And here's the thing
+
+**FILE NEW TICKET** &nbsp;|&nbsp; `P2` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `notifications-email` &nbsp;|&nbsp; `9e7b7c573a08aaef`
+
+**What the customer said**
+
+> Exactly that. And here's the thing — it wouldn't just save them time. Right now, because it's manual, half of them do it wrong. They screenshot the wrong date range, or they retype a number with a typo, and then I'm getting emails from regional directors going "why does Practice 12's number not match what Nadia sent." The manual step introduces errors that make the whole program look sloppy.
+>
+> -- **Nadia**, Crescent Dental Group, 2026-06-23 - [`transcripts/call-063.md:26`](transcripts/call-063.md#L26)
+
+**Why this disposition**
+
+- Priority `P2`: shows incorrect data; wrong numbers leave the product and get reported onward
+- De-dup: checked `PROJ-142`, all distinct
+  - `PROJ-142` (Password-reset emails delayed up to 30 minutes during peak h...) - same area but symptom does not match (trigger 0.00, symptom 0.00)
+
+<details><summary>Full ticket body as it would be filed</summary>
+
+```
+h2. What's happening
+Exactly that. And here's the thing — it wouldn't just save them time. Right now, because
+it's manual, half of them do it wrong. They screenshot the wrong date range, or they
+retype a number with a typo, and then I'm getting emails from regional directors going
+"why does Practice 12's number not match what Nadia sent." The manual step introduces
+errors that make the whole program look sloppy.
+
+h2. Details
+* *Trigger:* And here's the thing
+* *Symptom:* it wouldn't just save them time
+* *Scope:* reported by the external participant on this call
+* *Workaround:* stated on the call
+* *Component:* notifications-email
+
+h2. Priority: P2
+shows incorrect data; wrong numbers leave the product and get reported onward
+_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._
+
+h2. Evidence
+_Verbatim from the call recording. Quotes are read from the transcript file, not generated._
+
+*Crescent Dental Group* -- Nadia, 2026-06-23 ([call-063|transcripts/call-063.md])
+{quote}Exactly that. And here's the thing — it wouldn't just save them time. Right now, because it's manual, half of them do it wrong. They screenshot the wrong date range, or they retype a number with a typo, and then I'm getting emails from regional directors going "why does Practice 12's number not match what Nadia sent." The manual step introduces errors that make the whole program look sloppy.{quote}
+_transcripts/call-063.md:26 (turn 22)_
+
+h2. De-duplication
+Checked against these tracked issues and judged distinct:
+* PROJ-142 -- Password-reset emails delayed up to 30 minutes during peak hours
+** same area but symptom does not match (trigger 0.00, symptom 0.00) (similarity 0.0, by structured)
+
+----
+_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-063.md_
+```
+
+</details>
+
+`approve 9e7b7c573a08aaef` &nbsp; `reject 9e7b7c573a08aaef`
+
+---
+
+## 12. Exactly that. Stale for about ten minutes and then it sorts itself out. Same thing when
+
+**FILE NEW TICKET** &nbsp;|&nbsp; `P2` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `search` &nbsp;|&nbsp; `9f9da22a4617d52d`
+
+**What the customer said**
+
+> Exactly that. Stale for about ten minutes and then it sorts itself out. Same thing when I move a person from one team to another — search shows them on the old team for a bit.
+>
+> -- **Gerald Voss**, Copperline Energy, 2026-06-16 - [`transcripts/call-072.md:35`](transcripts/call-072.md#L35)
+
+**Why this disposition**
+
+- Priority `P2`: tied to a compliance or renewal driver
+- De-dup: checked `PROJ-131`, all distinct
+  - `PROJ-131` (Newly invited members not searchable until the following day...) - same area but symptom does not match (trigger 0.00, symptom 0.00)
+
+<details><summary>Full ticket body as it would be filed</summary>
+
+```
+h2. What's happening
+Exactly that. Stale for about ten minutes and then it sorts itself out. Same thing when
+I move a person from one team to another — search shows them on the old team for a bit.
+
+h2. Details
+* *Trigger:* Stale for about ten minutes and then it sorts itself out
+* *Symptom:* Same thing when I move a person from one team to another
+* *Scope:* reported by the external participant on this call
+* *Workaround:* none reported
+* *Component:* search
+
+h2. Priority: P2
+tied to a compliance or renewal driver
+_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._
+
+h2. Evidence
+_Verbatim from the call recording. Quotes are read from the transcript file, not generated._
+
+*Copperline Energy* -- Gerald Voss, 2026-06-16 ([call-072|transcripts/call-072.md])
+{quote}Exactly that. Stale for about ten minutes and then it sorts itself out. Same thing when I move a person from one team to another — search shows them on the old team for a bit.{quote}
+_transcripts/call-072.md:35 (turn 31)_
+
+h2. De-duplication
+Checked against these tracked issues and judged distinct:
+* PROJ-131 -- Newly invited members not searchable until the following day
+** same area but symptom does not match (trigger 0.00, symptom 0.00) (similarity 0.0, by structured)
+
+----
+_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-072.md_
+```
+
+</details>
+
+`approve 9f9da22a4617d52d` &nbsp; `reject 9f9da22a4617d52d`
+
+---
+
+## 13. Fine, genuinely fine
+
+**FILE NEW TICKET** &nbsp;|&nbsp; `P2` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `other` &nbsp;|&nbsp; `a3509ddfaf9e964e`
+
+**What the customer said**
+
+> Fine, genuinely fine. We've got about 400 people enrolled, mostly claims and underwriting managers. Usage is steady, no complaints about the coaches. I'm the systems person, not the program person, so I mostly hear about it when something breaks.
+>
+> -- **Gloria**, Pemrose Insurance, 2026-06-22 - [`transcripts/call-034.md:10`](transcripts/call-034.md#L10)
+
+**Why this disposition**
+
+- Priority `P2`: tied to a compliance or renewal driver
+- De-dup: no tracked issue in the same area
+
+<details><summary>Full ticket body as it would be filed</summary>
+
+```
+h2. What's happening
+Fine, genuinely fine. We've got about 400 people enrolled, mostly claims and
+underwriting managers. Usage is steady, no complaints about the coaches. I'm the systems
+person, not the program person, so I mostly hear about it when something breaks.
+
+h2. Details
+* *Trigger:* genuinely fine
+* *Symptom:* We've got about 400 people enrolled
+* *Scope:* reported by the external participant on this call
+* *Workaround:* none reported
+* *Component:* other
+
+h2. Priority: P2
+tied to a compliance or renewal driver
+_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._
+
+h2. Evidence
+_Verbatim from the call recording. Quotes are read from the transcript file, not generated._
+
+*Pemrose Insurance* -- Gloria, 2026-06-22 ([call-034|transcripts/call-034.md])
+{quote}Fine, genuinely fine. We've got about 400 people enrolled, mostly claims and underwriting managers. Usage is steady, no complaints about the coaches. I'm the systems person, not the program person, so I mostly hear about it when something breaks.{quote}
+_transcripts/call-034.md:10 (turn 6)_
+
+----
+_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-034.md_
+```
+
+</details>
+
+`approve a3509ddfaf9e964e` &nbsp; `reject a3509ddfaf9e964e`
+
+---
+
+## 14. Azure AD users hit an infinite redirect loop after a password change
 
 **FILE NEW TICKET** &nbsp;|&nbsp; `P2` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `auth-sso` &nbsp;|&nbsp; `c8b6e8128bc7dfe1`
 
@@ -585,7 +861,7 @@ _Filed from call transcript by the call-signal triage pipeline after human revie
 
 ---
 
-## 10. Session-completed webhook event carrying member ID and timestamp
+## 15. Session-completed webhook event carrying member ID and timestamp
 
 **FILE NEW TICKET** &nbsp;|&nbsp; `P2` &nbsp;|&nbsp; Feature &nbsp;|&nbsp; `webhooks` &nbsp;|&nbsp; `f08cadf122952638`
 
@@ -642,7 +918,7 @@ _Filed from call transcript by the call-signal triage pipeline after human revie
 
 ---
 
-## 11. Duplicate webhook deliveries with no idempotency key to de-duplicate against
+## 16. Duplicate webhook deliveries with no idempotency key to de-duplicate against
 
 **ATTACH CORROBORATION** &nbsp;|&nbsp; `P3` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `webhooks` &nbsp;|&nbsp; `1142ed602851ae20`
 
@@ -702,7 +978,7 @@ _Filed from call transcript by the call-signal triage pipeline after human revie
 
 ---
 
-## 12. Password-reset emails delayed up to thirty minutes during peak
+## 17. Password-reset emails delayed up to thirty minutes during peak
 
 **ATTACH CORROBORATION** &nbsp;|&nbsp; `P3` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `notifications-email` &nbsp;|&nbsp; `a2bc8b65273abc84`
 
@@ -764,7 +1040,7 @@ _Filed from call transcript by the call-signal triage pipeline after human revie
 
 ---
 
-## 13. Deactivating a member mid-session strands the mobile app on a blank white screen
+## 18. Deactivating a member mid-session strands the mobile app on a blank white screen
 
 **FILE NEW TICKET** &nbsp;|&nbsp; `P3` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `other` &nbsp;|&nbsp; `12ca753b160f7323`
 
@@ -824,7 +1100,7 @@ _Filed from call transcript by the call-signal triage pipeline after human revie
 
 ---
 
-## 14. Outbound email footer misspells the company name as 'BetterBrak'
+## 19. Outbound email footer misspells the company name as 'BetterBrak'
 
 **FILE NEW TICKET** &nbsp;|&nbsp; `P3` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `notifications-email` &nbsp;|&nbsp; `188e03f154c1f324`
 
@@ -884,5 +1160,161 @@ _Filed from call transcript by the call-signal triage pipeline after human revie
 </details>
 
 `approve 188e03f154c1f324` &nbsp; `reject 188e03f154c1f324`
+
+---
+
+## 20. Right. And what I'd love
+
+**FILE NEW TICKET** &nbsp;|&nbsp; `P3` &nbsp;|&nbsp; Feature &nbsp;|&nbsp; `calendar` &nbsp;|&nbsp; `4282b074a0e4d509`
+
+**What the customer said**
+
+> Right. And what I'd love — and this is my ask — is for the coach's calendar hold to auto-release if the member no-shows, say, ten minutes in. Give the person a ten-minute grace window, sure, people run late. But if they haven't joined after ten minutes, free up the rest of that slot so it can go back into availability. Then someone else can book it, or the coach can reclaim the time.
+>
+> -- **Owen**, Fairbanks Consulting, 2026-06-29 - [`transcripts/call-132.md:43`](transcripts/call-132.md#L43)
+
+**Why this disposition**
+
+- Priority `P3`: no data-correctness, workflow-blocking or compliance impact identified
+- De-dup: no tracked issue in the same area
+
+<details><summary>Full ticket body as it would be filed</summary>
+
+```
+h2. What's happening
+Right. And what I'd love — and this is my ask — is for the coach's calendar hold to
+auto-release if the member no-shows, say, ten minutes in. Give the person a ten-minute
+grace window, sure, people run late. But if they haven't joined after ten minutes, free
+up the rest of that slot so it can go back into availability. Then someone else can book
+it, or the coach can reclaim the time.
+
+h2. Details
+* *Trigger:* And what I'd love
+* *Symptom:* and this is my ask
+* *Scope:* reported by the external participant on this call
+* *Workaround:* none reported
+* *Component:* calendar
+
+h2. Priority: P3
+no data-correctness, workflow-blocking or compliance impact identified
+
+h2. Evidence
+_Verbatim from the call recording. Quotes are read from the transcript file, not generated._
+
+*Fairbanks Consulting* -- Owen, 2026-06-29 ([call-132|transcripts/call-132.md])
+{quote}Right. And what I'd love — and this is my ask — is for the coach's calendar hold to auto-release if the member no-shows, say, ten minutes in. Give the person a ten-minute grace window, sure, people run late. But if they haven't joined after ten minutes, free up the rest of that slot so it can go back into availability. Then someone else can book it, or the coach can reclaim the time.{quote}
+_transcripts/call-132.md:43 (turn 39)_
+
+----
+_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-132.md_
+```
+
+</details>
+
+`approve 4282b074a0e4d509` &nbsp; `reject 4282b074a0e4d509`
+
+---
+
+## 21. Honestly? I think it's more shiny than real
+
+**FILE NEW TICKET** &nbsp;|&nbsp; `P3` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `scheduling` &nbsp;|&nbsp; `8bc7fa2489847599`
+
+**What the customer said**
+
+> Honestly? I think it's more shiny than real. Our members book sessions in advance, they're not sitting there at 3am needing live chat about their coaching. But my CHRO heard "twenty-four-seven" and it stuck.
+>
+> -- **Constance Reyes**, Oakhaven Senior Living, 2026-06-25 - [`transcripts/call-123.md:38`](transcripts/call-123.md#L38)
+
+**Why this disposition**
+
+- Priority `P3`: no data-correctness, workflow-blocking or compliance impact identified
+- De-dup: no tracked issue in the same area
+
+<details><summary>Full ticket body as it would be filed</summary>
+
+```
+h2. What's happening
+Honestly? I think it's more shiny than real. Our members book sessions in advance,
+they're not sitting there at 3am needing live chat about their coaching. But my CHRO
+heard "twenty-four-seven" and it stuck.
+
+h2. Details
+* *Trigger:* Honestly? I think it's more shiny than real
+* *Symptom:* Our members book sessions in advance
+* *Scope:* reported by the external participant on this call
+* *Workaround:* none reported
+* *Component:* scheduling
+
+h2. Priority: P3
+no data-correctness, workflow-blocking or compliance impact identified
+_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._
+
+h2. Evidence
+_Verbatim from the call recording. Quotes are read from the transcript file, not generated._
+
+*Oakhaven Senior Living* -- Constance Reyes, 2026-06-25 ([call-123|transcripts/call-123.md])
+{quote}Honestly? I think it's more shiny than real. Our members book sessions in advance, they're not sitting there at 3am needing live chat about their coaching. But my CHRO heard "twenty-four-seven" and it stuck.{quote}
+_transcripts/call-123.md:38 (turn 34)_
+
+----
+_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-123.md_
+```
+
+</details>
+
+`approve 8bc7fa2489847599` &nbsp; `reject 8bc7fa2489847599`
+
+---
+
+## 22. Exactly. And here's the part that bugs me
+
+**FILE NEW TICKET** &nbsp;|&nbsp; `P3` &nbsp;|&nbsp; Bug &nbsp;|&nbsp; `scheduling` &nbsp;|&nbsp; `910d10d46d8d8cb6`
+
+**What the customer said**
+
+> Exactly. And here's the part that bugs me — I have other consultants who would happily grab that slot. Like, I'll have someone messaging me saying "can I get a session this week, I'm slammed but I have a gap Thursday at 2," and there's a coach sitting alone in an empty video room at Thursday at 2 because someone else no-showed. But the system has that slot locked to the no-show for the whole hour, so nobody can claim it.
+>
+> -- **Owen**, Fairbanks Consulting, 2026-06-29 - [`transcripts/call-132.md:41`](transcripts/call-132.md#L41)
+
+**Why this disposition**
+
+- Priority `P3`: no data-correctness, workflow-blocking or compliance impact identified
+- De-dup: no tracked issue in the same area
+
+<details><summary>Full ticket body as it would be filed</summary>
+
+```
+h2. What's happening
+Exactly. And here's the part that bugs me — I have other consultants who would happily
+grab that slot. Like, I'll have someone messaging me saying "can I get a session this
+week, I'm slammed but I have a gap Thursday at 2," and there's a coach sitting alone in
+an empty video room at Thursday at 2 because someone else no-showed. But the system has
+that slot locked to the no-show for the whole hour,
+
+h2. Details
+* *Trigger:* And here's the part that bugs me
+* *Symptom:* I have other consultants who would happily grab that slot
+* *Scope:* reported by the external participant on this call
+* *Workaround:* none reported
+* *Component:* scheduling
+
+h2. Priority: P3
+no data-correctness, workflow-blocking or compliance impact identified
+_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._
+
+h2. Evidence
+_Verbatim from the call recording. Quotes are read from the transcript file, not generated._
+
+*Fairbanks Consulting* -- Owen, 2026-06-29 ([call-132|transcripts/call-132.md])
+{quote}Exactly. And here's the part that bugs me — I have other consultants who would happily grab that slot. Like, I'll have someone messaging me saying "can I get a session this week, I'm slammed but I have a gap Thursday at 2," and there's a coach sitting alone in an empty video room at Thursday at 2 because someone else no-showed. But the system has that slot locked to the no-show for the whole hour, so nobody can claim it.{quote}
+_transcripts/call-132.md:41 (turn 37)_
+
+----
+_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-132.md_
+```
+
+</details>
+
+`approve 910d10d46d8d8cb6` &nbsp; `reject 910d10d46d8d8cb6`
 
 ---

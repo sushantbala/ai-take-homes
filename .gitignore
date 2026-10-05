@@ -3,3 +3,9 @@ __pycache__/
 .DS_Store
 # Local stub output — should never be committed
 **/outbox/*.jsonl
+
+# Local pipeline state (ledger, logs, review queue) - regenerate with:
+#   python -m solution.cli run
+# Committed run evidence lives in take-homes/applied-ai-engineer/artifacts/ instead.
+**/solution/_state/
+.claude/settings.local.json

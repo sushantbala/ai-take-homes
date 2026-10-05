@@ -1,0 +1,2656 @@
+{
+  "what_this_proves": "Every one of the 140 provided transcripts was parsed, screened, gated, de-duplicated and clustered in a single run with zero errors.",
+  "provider": "chain (authored fixtures for calls 001-015, deterministic heuristic baseline for the 125 holdout calls; see solution/llm/heuristic.py)",
+  "summary": {
+    "run_id": "artifact-full-corpus",
+    "transcripts_seen": 140,
+    "transcripts_processed": 134,
+    "transcripts_skipped_internal": 6,
+    "transcripts_unchanged": 0,
+    "transcripts_errored": 0,
+    "error_rate": 0.0,
+    "candidates_extracted": 213,
+    "candidates_dropped": 190,
+    "candidates_per_call": 1.59,
+    "actions_file_new": 17,
+    "actions_corroborate": 4,
+    "actions_already_shipped": 1,
+    "actions_suppressed_idempotent": 0,
+    "file_rate": 0.1269,
+    "drop_reasons": {
+      "cosmetic_preference": 3,
+      "customer_declined_filing": 2,
+      "customer_side_root_cause": 11,
+      "hearsay": 5,
+      "injection_quarantined": 2,
+      "internal_only_call": 6,
+      "not_a_product_issue": 3,
+      "resolved_on_call": 7,
+      "retracted_on_call": 8,
+      "unactionable_vague": 149
+    },
+    "health_alerts": []
+  },
+  "totals": {
+    "transcripts_found": 140,
+    "transcripts_processed": 134,
+    "transcripts_skipped_internal_only": 6,
+    "transcripts_errored": 0,
+    "candidates_extracted": 213,
+    "candidates_dropped": 190,
+    "actions_proposed": 22
+  },
+  "dedup_against_tracked_issues": {
+    "note": "Issues matched to data/existing_issues.json were NOT re-filed. Corroboration was recorded against the tracked key instead.",
+    "count": 5,
+    "entries": [
+      {
+        "target": "PROJ-101",
+        "title": "Scheduled report timestamps render seven hours ahead of the workspace timezone",
+        "outcome": "corroborate",
+        "calls": [
+          "call-004"
+        ],
+        "accounts": [
+          "Cedar Grove Schools"
+        ],
+        "rationale": "duplicate of PROJ-101 (In Progress): trigger (1.00) and symptom (0.78) both match [decided by structured]"
+      },
+      {
+        "target": "PROJ-087",
+        "title": "Duplicate webhook deliveries with no idempotency key to de-duplicate against",
+        "outcome": "corroborate",
+        "calls": [
+          "call-005"
+        ],
+        "accounts": [
+          "Vanta Retail"
+        ],
+        "rationale": "duplicate of PROJ-087 (In Progress): Identical trigger (outbound webhook delivery) and identical symptom (duplicate delivery of the same event); the wording differs but the defect does not. [decided by model]"
+      },
+      {
+        "target": "PROJ-110",
+        "title": "Android app crashes on launch after the latest update",
+        "outcome": "corroborate",
+        "calls": [
+          "call-008"
+        ],
+        "accounts": [
+          "Northwind Logistics"
+        ],
+        "rationale": "duplicate of PROJ-110 (Open): Same trigger (launching the Android app after the update) and same observable failure (crash before reaching login); a second account on the tracked 4.2 crash. [decided by model]"
+      },
+      {
+        "target": "PROJ-095",
+        "title": "Bulk CSV export of the full member roster",
+        "outcome": "already-shipped",
+        "calls": [
+          "call-013"
+        ],
+        "accounts": [
+          "Ridgeway Manufacturing"
+        ],
+        "rationale": "already shipped as PROJ-095 (Shipped): trigger (1.00) and symptom (0.88) both match [decided by structured]"
+      },
+      {
+        "target": "PROJ-142",
+        "title": "Password-reset emails delayed up to thirty minutes during peak",
+        "outcome": "corroborate",
+        "calls": [
+          "call-015"
+        ],
+        "accounts": [
+          "Juniper Media"
+        ],
+        "rationale": "duplicate of PROJ-142 (Open): trigger (0.71) and symptom (0.88) both match [decided by structured]"
+      }
+    ]
+  },
+  "cross_call_clusters": {
+    "note": "One defect reported by multiple accounts collapses into ONE ticket carrying every source, rather than one ticket per call.",
+    "count": 1,
+    "entries": [
+      {
+        "title": "Search returns stale results for about ten minutes after a team rename or member move",
+        "fingerprint": "9966207d38a0db1f",
+        "calls": [
+          "call-006",
+          "call-012"
+        ],
+        "accounts": [
+          "Harborline Media",
+          "Gable Group"
+        ]
+      }
+    ]
+  },
+  "drop_reasons": {
+    "unactionable_vague": 149,
+    "customer_side_root_cause": 11,
+    "retracted_on_call": 8,
+    "resolved_on_call": 7,
+    "internal_only_call": 6,
+    "hearsay": 5,
+    "cosmetic_preference": 3,
+    "not_a_product_issue": 3,
+    "customer_declined_filing": 2,
+    "injection_quarantined": 2
+  },
+  "health_alerts": [],
+  "proposed_actions": [
+    {
+      "fingerprint": "3c25dbf3ac1f8e62",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Usage dashboard 'active members' card contradicts its own per-team breakdown",
+      "component": "dashboard",
+      "priority": "P1",
+      "severity": "major",
+      "priority_rationale": "shows incorrect data org-wide",
+      "body": "h2. What's happening\nThe headline 'active members' summary card on the usage dashboard reads 280 while the\nper-team breakdown directly beneath it totals 412, which matches the customer's admin\npanel. Same page, same load. Started about a week and a half ago.\n\nh2. Details\n* *Trigger:* opening the usage dashboard and comparing the summary card to the per-team breakdown\n* *Symptom:* the active members summary card shows 280 while the per-team breakdown below totals 412\n* *Scope:* every admin viewing the usage dashboard for this workspace\n* *Workaround:* add up the per-team rows manually\n* *Component:* dashboard\n\nh2. Priority: P1\nshows incorrect data org-wide\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Meridian Health* -- Dana, 2026-06-15 ([call-001|transcripts/call-001.md])\n{quote}The headline \"active members\" card \u2014 the big number at the top \u2014 says 280 for this month. Our admin panel says 412. And here's the kicker: the per-team breakdown directly below the card adds up to 412. So the detail is right and the headline is wrong, on the same screen.{quote}\n_transcripts/call-001.md:30 (turn 26)_\n{quote}Exactly. Add up the rows, you get 412. Read the big card, you get 280. Same page, same load, at the same moment.{quote}\n_transcripts/call-001.md:32 (turn 28)_\n{quote}It feeds the monthly ops review. Rob \u2014 our finance partner \u2014 literally screenshots that card and drops it into the deck. So last month somebody in the review asked me why adoption \"fell off a cliff\" and I had to explain, live, that it hadn't, the number's just wrong. Not a great look in a room full of VPs.{quote}\n_transcripts/call-001.md:36 (turn 32)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-001.md_",
+      "sources": [
+        {
+          "call_id": "call-001",
+          "account": "Meridian Health",
+          "date": "2026-06-15",
+          "reporter": "Dana",
+          "transcript_path": "transcripts/call-001.md",
+          "snippets": [
+            {
+              "turn_idx": 26,
+              "line_no": 30,
+              "speaker": "Dana",
+              "side": "EXTERNAL",
+              "text": "The headline \"active members\" card \u2014 the big number at the top \u2014 says 280 for this month. Our admin panel says 412. And here's the kicker: the per-team breakdown directly below the card adds up to 412. So the detail is right and the headline is wrong, on the same screen."
+            },
+            {
+              "turn_idx": 28,
+              "line_no": 32,
+              "speaker": "Dana",
+              "side": "EXTERNAL",
+              "text": "Exactly. Add up the rows, you get 412. Read the big card, you get 280. Same page, same load, at the same moment."
+            },
+            {
+              "turn_idx": 32,
+              "line_no": 36,
+              "speaker": "Dana",
+              "side": "EXTERNAL",
+              "text": "It feeds the monthly ops review. Rob \u2014 our finance partner \u2014 literally screenshots that card and drops it into the deck. So last month somebody in the review asked me why adoption \"fell off a cliff\" and I had to explain, live, that it hadn't, the number's just wrong. Not a great look in a room full of VPs."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "485df2a6956412c8",
+      "outcome": "file-new",
+      "type": "Feature",
+      "title": "Assign roles automatically from SAML group membership on every login",
+      "component": "admin-roles",
+      "priority": "P0",
+      "severity": "critical",
+      "priority_rationale": "blocks a workflow org-wide with no workaround",
+      "body": "h2. What's happening\nEvery SSO user lands as a basic member and must be promoted by hand, which does not\nscale to 400 users and fails the customer's access-review control. They need IdP group\nto role mapping evaluated on every login, not only at first provision, so group changes\npropagate automatically.\n\nh2. Details\n* *Trigger:* a federated user logging in via SAML\n* *Symptom:* every user is provisioned as a basic member and an admin must promote them by hand\n* *Scope:* all 400 users at full rollout for a regulated financial customer\n* *Workaround:* manual promotion by an admin, one user at a time\n* *Component:* admin-roles\n\nh2. Priority: P0\nblocks a workflow org-wide with no workaround\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Atlas Financial* -- Renee, 2026-06-17 ([call-003|transcripts/call-003.md])\n{quote}Right. We need role assignment to happen automatically from SAML group membership, at login. Our IdP already exposes the groups in the assertion \u2014 finance-managers, people-admins, read-only-auditors, and so on. What I want is: you map an IdP group to a BetterBark role, and you apply that mapping on every login, so if someone's group changes on our side, their role changes on yours the next time they sign in.{quote}\n_transcripts/call-003.md:40 (turn 36)_\n{quote}That's it precisely. Evaluated every login is the important part. First-provision-only doesn't help me, because people move between groups constantly and I need it to stay in sync, not snapshot once.{quote}\n_transcripts/call-003.md:42 (turn 38)_\n{quote}Without it we can't pass our access-review audit. Our controls require that access maps to a source of truth \u2014 our directory groups \u2014 not to whatever some admin clicked last Tuesday. Manual promotion means the source of truth is a human's memory, which fails the control. And without passing the audit, we can't go to full rollout. It is the single thing standing between us and turning on all four hundred seats.{quote}\n_transcripts/call-003.md:44 (turn 40)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-003.md_",
+      "sources": [
+        {
+          "call_id": "call-003",
+          "account": "Atlas Financial",
+          "date": "2026-06-17",
+          "reporter": "Renee",
+          "transcript_path": "transcripts/call-003.md",
+          "snippets": [
+            {
+              "turn_idx": 36,
+              "line_no": 40,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "Right. We need role assignment to happen automatically from SAML group membership, at login. Our IdP already exposes the groups in the assertion \u2014 finance-managers, people-admins, read-only-auditors, and so on. What I want is: you map an IdP group to a BetterBark role, and you apply that mapping on every login, so if someone's group changes on our side, their role changes on yours the next time they sign in."
+            },
+            {
+              "turn_idx": 38,
+              "line_no": 42,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "That's it precisely. Evaluated every login is the important part. First-provision-only doesn't help me, because people move between groups constantly and I need it to stay in sync, not snapshot once."
+            },
+            {
+              "turn_idx": 40,
+              "line_no": 44,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "Without it we can't pass our access-review audit. Our controls require that access maps to a source of truth \u2014 our directory groups \u2014 not to whatever some admin clicked last Tuesday. Manual promotion means the source of truth is a human's memory, which fails the control. And without passing the audit, we can't go to full rollout. It is the single thing standing between us and turning on all four hundred seats."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "9966207d38a0db1f",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Search returns stale results for about ten minutes after a team rename or member move",
+      "component": "search",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "blocks a workflow but a workaround exists; most severe of 2 corroborating reports",
+      "body": "h2. What's happening\nAfter renaming a team or moving a member, search keeps returning the old state for\nroughly ten minutes before self-correcting. Searching the new team name returns nothing;\nsearching a moved person shows the old team. Reproducible on demand, confirmed three\ntimes.\n\nh2. Details\n* *Trigger:* renaming a team or moving a member between teams\n* *Symptom:* search returns the old team name or empty results for about ten minutes then self corrects\n* *Scope:* all admins and managers searching during a period of edits\n* *Workaround:* wait ten minutes and search again\n* *Component:* search\n\nh2. Priority: P2\nblocks a workflow but a workaround exists; most severe of 2 corroborating reports\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Harborline Media* -- Aisha, 2026-06-18 ([call-006|transcripts/call-006.md])\n{quote}There's a but. There's a real bug we hit over and over, and it's about search, not the editing. After we rename a team or move a member, search keeps returning the old state for about ten minutes.{quote}\n_transcripts/call-006.md:24 (turn 20)_\n{quote}So say I rename \"Digital Video\" to \"Video Production.\" Somebody searches \"Video Production\" \u2014 the new name \u2014 and gets nothing. Empty. Or they search for a person I just moved, and search still shows them filed under the old team. And then, with no action from anyone, it quietly fixes itself. Ten minutes later the same search is correct.{quote}\n_transcripts/call-006.md:26 (turn 22)_\n{quote}That's exactly what it looks like. And I can reproduce it on demand \u2014 I did it three times while I was documenting it for myself. Rename a test team, search immediately, stale result. Wait ten minutes, search again, correct result. Every single time.{quote}\n_transcripts/call-006.md:28 (turn 24)_\n{quote}Oh, it was a mess. It caused a stream of \"where did this person go\" tickets to my desk. A manager would search for someone right after I moved them, get the old team or get nothing, and conclude I'd deleted the person or lost them. So I'm getting panicked messages while I'm mid-reorg, and the answer every time is \"just wait ten minutes and search again,\" which is not a satisfying thing to tell a panicking manager.{quote}\n_transcripts/call-006.md:34 (turn 30)_\n\n*Gable Group* -- Devon, 2026-06-21 ([call-012|transcripts/call-012.md])\n{quote}Feedback, yes. Mostly one thing, repeatedly, and it's a real one. We merged those two departments this month, which meant renaming teams and moving about forty people around. And every single time we made a change, search lied to us for a while afterward.{quote}\n_transcripts/call-012.md:16 (turn 12)_\n{quote}Two flavors. One \u2014 search for the new team name right after renaming it, and you get nothing. Empty results, like the team doesn't exist. Two \u2014 search for a person we just moved, and search shows them still on the old team, filed under the department that no longer exists. And then, if you wait \u2014 I don't know, five, ten minutes \u2014 it sorts itself out. Same search, correct answer.{quote}\n_transcripts/call-012.md:18 (turn 14)_\n{quote}That's exactly it. And it was consistent enough that my admins started planning around it. I'm not kidding \u2014 they started setting literal kitchen timers. Make a batch of changes, set a ten-minute timer, don't trust search until it dings. I'd describe that workflow as \"medieval.\"{quote}\n_transcripts/call-012.md:20 (turn 16)_\n{quote}Consistent enough to plan around, yes. And look, I'm a systems person \u2014 I get it, indexes take time to rebuild, eventual consistency is a real thing, I'm not naive about it. But here's my actual complaint: nothing in the UI says that. The edit screen says \"saved.\" Search says the opposite. And my admin is left standing there deciding which one of you is lying, with no signal about which to believe.{quote}\n_transcripts/call-012.md:22 (turn 18)_\n\nh2. Corroboration\nReported independently by 2 accounts: Harborline Media, Gable Group.\n\nh2. De-duplication\nChecked against these tracked issues and judged distinct:\n* PROJ-131 -- Newly invited members not searchable until the following day\n** same area but symptom does not match (trigger 0.20, symptom 0.18) (similarity 0.2, by structured)\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-006.md_",
+      "sources": [
+        {
+          "call_id": "call-006",
+          "account": "Harborline Media",
+          "date": "2026-06-18",
+          "reporter": "Aisha",
+          "transcript_path": "transcripts/call-006.md",
+          "snippets": [
+            {
+              "turn_idx": 20,
+              "line_no": 24,
+              "speaker": "Aisha",
+              "side": "EXTERNAL",
+              "text": "There's a but. There's a real bug we hit over and over, and it's about search, not the editing. After we rename a team or move a member, search keeps returning the old state for about ten minutes."
+            },
+            {
+              "turn_idx": 22,
+              "line_no": 26,
+              "speaker": "Aisha",
+              "side": "EXTERNAL",
+              "text": "So say I rename \"Digital Video\" to \"Video Production.\" Somebody searches \"Video Production\" \u2014 the new name \u2014 and gets nothing. Empty. Or they search for a person I just moved, and search still shows them filed under the old team. And then, with no action from anyone, it quietly fixes itself. Ten minutes later the same search is correct."
+            },
+            {
+              "turn_idx": 24,
+              "line_no": 28,
+              "speaker": "Aisha",
+              "side": "EXTERNAL",
+              "text": "That's exactly what it looks like. And I can reproduce it on demand \u2014 I did it three times while I was documenting it for myself. Rename a test team, search immediately, stale result. Wait ten minutes, search again, correct result. Every single time."
+            },
+            {
+              "turn_idx": 30,
+              "line_no": 34,
+              "speaker": "Aisha",
+              "side": "EXTERNAL",
+              "text": "Oh, it was a mess. It caused a stream of \"where did this person go\" tickets to my desk. A manager would search for someone right after I moved them, get the old team or get nothing, and conclude I'd deleted the person or lost them. So I'm getting panicked messages while I'm mid-reorg, and the answer every time is \"just wait ten minutes and search again,\" which is not a satisfying thing to tell a panicking manager."
+            }
+          ]
+        },
+        {
+          "call_id": "call-012",
+          "account": "Gable Group",
+          "date": "2026-06-21",
+          "reporter": "Devon",
+          "transcript_path": "transcripts/call-012.md",
+          "snippets": [
+            {
+              "turn_idx": 12,
+              "line_no": 16,
+              "speaker": "Devon",
+              "side": "EXTERNAL",
+              "text": "Feedback, yes. Mostly one thing, repeatedly, and it's a real one. We merged those two departments this month, which meant renaming teams and moving about forty people around. And every single time we made a change, search lied to us for a while afterward."
+            },
+            {
+              "turn_idx": 14,
+              "line_no": 18,
+              "speaker": "Devon",
+              "side": "EXTERNAL",
+              "text": "Two flavors. One \u2014 search for the new team name right after renaming it, and you get nothing. Empty results, like the team doesn't exist. Two \u2014 search for a person we just moved, and search shows them still on the old team, filed under the department that no longer exists. And then, if you wait \u2014 I don't know, five, ten minutes \u2014 it sorts itself out. Same search, correct answer."
+            },
+            {
+              "turn_idx": 16,
+              "line_no": 20,
+              "speaker": "Devon",
+              "side": "EXTERNAL",
+              "text": "That's exactly it. And it was consistent enough that my admins started planning around it. I'm not kidding \u2014 they started setting literal kitchen timers. Make a batch of changes, set a ten-minute timer, don't trust search until it dings. I'd describe that workflow as \"medieval.\""
+            },
+            {
+              "turn_idx": 18,
+              "line_no": 22,
+              "speaker": "Devon",
+              "side": "EXTERNAL",
+              "text": "Consistent enough to plan around, yes. And look, I'm a systems person \u2014 I get it, indexes take time to rebuild, eventual consistency is a real thing, I'm not naive about it. But here's my actual complaint: nothing in the UI says that. The edit screen says \"saved.\" Search says the opposite. And my admin is left standing there deciding which one of you is lying, with no signal about which to believe."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [
+        {
+          "key": "PROJ-131",
+          "summary": "Newly invited members not searchable until the following day",
+          "reason": "same area but symptom does not match (trigger 0.20, symptom 0.18)",
+          "similarity": 0.2,
+          "decided_by": "structured"
+        }
+      ],
+      "flags": [
+        "corroborated_by_2_accounts"
+      ]
+    },
+    {
+      "fingerprint": "188e03f154c1f324",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Outbound email footer misspells the company name as 'BetterBrak'",
+      "component": "notifications-email",
+      "priority": "P3",
+      "severity": "trivial",
+      "priority_rationale": "cosmetic defect: real but trivial, floored at P3 regardless of how it was framed (customer framed it as high urgency)",
+      "body": "h2. What's happening\nConfirmation emails carry 'BetterBrak' in the footer instead of BetterBark. Present on\nevery confirmation email. The customer's comms director called it a P0 brand\ncatastrophe; nothing is functionally broken.\n\nh2. Details\n* *Trigger:* any outbound confirmation email\n* *Symptom:* the footer misspells the company name as BetterBrak\n* *Scope:* every confirmation email sent to every customer\n* *Workaround:* none reported\n* *Component:* notifications-email\n\nh2. Priority: P3\ncosmetic defect: real but trivial, floored at P3 regardless of how it was framed (customer framed it as high urgency)\n_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Northwind Logistics* -- Marcus, 2026-06-19 ([call-008|transcripts/call-008.md])\n{quote}She noticed the confirmation emails your system sends have \"BetterBrak\" \u2014 B-E-T-T-E-R-B-R-A-K \u2014 in the footer. Your own company name, misspelled, right there in the email footer. BetterBrak.{quote}\n_transcripts/call-008.md:48 (turn 44)_\n{quote}Oh yes. BetterBrak. Every confirmation email, apparently.{quote}\n_transcripts/call-008.md:50 (turn 46)_\n{quote}Every one. And she called it, quote, \"a P0 brand catastrophe\" and said she's, quote, \"genuinely alarmed.\" She used the word alarmed. About a typo. I told her I'd relay it with a straight face and I am now doing that, and I want you to know that face is costing me a great deal.{quote}\n_transcripts/call-008.md:52 (turn 48)_\n\nh2. De-duplication\nChecked against these tracked issues and judged distinct:\n* PROJ-142 -- Password-reset emails delayed up to 30 minutes during peak hours\n** same area but symptom does not match (trigger 0.33, symptom 0.00) (similarity 0.125, by structured)\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-008.md_",
+      "sources": [
+        {
+          "call_id": "call-008",
+          "account": "Northwind Logistics",
+          "date": "2026-06-19",
+          "reporter": "Marcus",
+          "transcript_path": "transcripts/call-008.md",
+          "snippets": [
+            {
+              "turn_idx": 44,
+              "line_no": 48,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "She noticed the confirmation emails your system sends have \"BetterBrak\" \u2014 B-E-T-T-E-R-B-R-A-K \u2014 in the footer. Your own company name, misspelled, right there in the email footer. BetterBrak."
+            },
+            {
+              "turn_idx": 46,
+              "line_no": 50,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "Oh yes. BetterBrak. Every confirmation email, apparently."
+            },
+            {
+              "turn_idx": 48,
+              "line_no": 52,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "Every one. And she called it, quote, \"a P0 brand catastrophe\" and said she's, quote, \"genuinely alarmed.\" She used the word alarmed. About a typo. I told her I'd relay it with a straight face and I am now doing that, and I want you to know that face is costing me a great deal."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [
+        {
+          "key": "PROJ-142",
+          "summary": "Password-reset emails delayed up to 30 minutes during peak hours",
+          "reason": "same area but symptom does not match (trigger 0.33, symptom 0.00)",
+          "similarity": 0.125,
+          "decided_by": "structured"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "fingerprint": "29c1d164d22fda77",
+      "outcome": "file-new",
+      "type": "Feature",
+      "title": "Audit-log export API for automated nightly SIEM ingestion",
+      "component": "api",
+      "priority": "P0",
+      "severity": "critical",
+      "priority_rationale": "blocks a workflow org-wide with no workaround",
+      "body": "h2. What's happening\nThe audit log is available only as a UI view. The customer's SOC team needs a\nfilterable, paginated, machine-readable API endpoint so a nightly unattended job can\npull audit events into their SIEM. A human clicking export does not satisfy the SOC 2\ncontinuous-monitoring control.\n\nh2. Details\n* *Trigger:* attempting automated nightly retrieval of audit events\n* *Symptom:* no machine-readable paginated audit-log endpoint exists, only a UI view\n* *Scope:* the customer's SOC team and SOC 2 continuous-monitoring control\n* *Workaround:* a human clicking export CSV weekly, which fails the control\n* *Component:* api\n\nh2. Priority: P0\nblocks a workflow org-wide with no workaround\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Atlas Financial* -- Renee, 2026-06-20 ([call-010|transcripts/call-010.md])\n{quote}Right. Our SOC team needs to pull audit events into our SIEM on a nightly job. Automated, unattended, every night. So what I need is an API endpoint \u2014 filterable by time range, paginated, machine-readable. JSON, ideally. Give me \"all audit events between these two timestamps,\" let me page through them, done.{quote}\n_transcripts/call-010.md:18 (turn 14)_\n{quote}Exactly. And I want to be clear about why the UI export button doesn't count, because someone will suggest it. A human clicking \"export CSV\" once a week is not continuous monitoring. It's a person, doing a manual task, on a schedule they'll eventually forget. Our SOC 2 auditors will keep writing it up as a control gap until an automated pull exists. Continuous monitoring means no human touches it.{quote}\n_transcripts/call-010.md:20 (turn 16)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-010.md_",
+      "sources": [
+        {
+          "call_id": "call-010",
+          "account": "Atlas Financial",
+          "date": "2026-06-20",
+          "reporter": "Renee",
+          "transcript_path": "transcripts/call-010.md",
+          "snippets": [
+            {
+              "turn_idx": 14,
+              "line_no": 18,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "Right. Our SOC team needs to pull audit events into our SIEM on a nightly job. Automated, unattended, every night. So what I need is an API endpoint \u2014 filterable by time range, paginated, machine-readable. JSON, ideally. Give me \"all audit events between these two timestamps,\" let me page through them, done."
+            },
+            {
+              "turn_idx": 16,
+              "line_no": 20,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "Exactly. And I want to be clear about why the UI export button doesn't count, because someone will suggest it. A human clicking \"export CSV\" once a week is not continuous monitoring. It's a person, doing a manual task, on a schedule they'll eventually forget. Our SOC 2 auditors will keep writing it up as a control gap until an automated pull exists. Continuous monitoring means no human touches it."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "c8b6e8128bc7dfe1",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Azure AD users hit an infinite redirect loop after a password change",
+      "component": "auth-sso",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "blocks a workflow but a workaround exists",
+      "body": "h2. What's happening\nAfter a user changes their network password, opening the app bounces them to the IdP,\nwhich authenticates them successfully, returns them, and the app immediately bounces\nthem back again, indefinitely. They never reach the app at all. Clearing cookies for the\ndomain is the only escape. Five of forty pilot users so far, limited only by staggered\nrotation dates; at full rollout a ninety-day policy puts all four hundred users through\nthis every quarter.\n\nh2. Details\n* *Trigger:* an Azure AD federated user logging in after changing their network password\n* *Symptom:* an infinite redirect loop between the app and the IdP that blocks entry entirely\n* *Scope:* all Azure AD federated users, every password rotation cycle\n* *Workaround:* clear browser cookies for the domain, which requires a helpdesk call\n* *Component:* auth-sso\n\nh2. Priority: P2\nblocks a workflow but a workaround exists\n_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Atlas Financial* -- Renee, 2026-06-20 ([call-010|transcripts/call-010.md])\n{quote}When one of our users changes their network password \u2014 our regular rotation \u2014 and then hits your app, they get stuck in a login loop. And I want to walk you through the exact loop, because I need you to file this precisely.{quote}\n_transcripts/call-010.md:28 (turn 24)_\n{quote}User changes their password on our side. Then they open your app. Your app bounces them to our IdP to authenticate. The IdP authenticates them just fine \u2014 new password, correct, no problem, IdP says \"yes, this is them.\" IdP sends them back to your app. And then your side immediately bounces them right back to the IdP again. And around, and around. Authenticate, return, bounce, authenticate, return, bounce. Infinite.{quote}\n_transcripts/call-010.md:32 (turn 28)_\n{quote}That's it exactly. They never get in. Not \"logged in briefly then out\" \u2014 they never reach the app at all. It just spins between your login and our IdP until they give up.{quote}\n_transcripts/call-010.md:34 (turn 30)_\n{quote}Clearing browser cookies for your domain breaks the loop. Once they wipe your cookies, they log in clean and they're fine. But that's a support call every single time \u2014 you can't tell four hundred people \"clear your cookies\" and expect that to scale.{quote}\n_transcripts/call-010.md:38 (turn 34)_\n{quote}Two \u2014 the symptom is the opposite shape. In the Okta issue, people are being logged out early but they can get back in. In ours, nobody is being logged out early at all \u2014 they can't get in in the first place after a password change. It's not a premature expiry, it's a hard redirect loop that blocks entry entirely until cookies are cleared. Early-logout-but-you-can-return versus cannot-enter-at-all. Different shape entirely.{quote}\n_transcripts/call-010.md:44 (turn 40)_\n\nh2. De-duplication\nChecked against these tracked issues and judged distinct:\n* PROJ-064 -- SSO session expires earlier than the configured lifetime for Okta-federated users\n** same area but symptom does not match (trigger 0.29, symptom 0.11) (similarity 0.188, by structured)\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-010.md_",
+      "sources": [
+        {
+          "call_id": "call-010",
+          "account": "Atlas Financial",
+          "date": "2026-06-20",
+          "reporter": "Renee",
+          "transcript_path": "transcripts/call-010.md",
+          "snippets": [
+            {
+              "turn_idx": 24,
+              "line_no": 28,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "When one of our users changes their network password \u2014 our regular rotation \u2014 and then hits your app, they get stuck in a login loop. And I want to walk you through the exact loop, because I need you to file this precisely."
+            },
+            {
+              "turn_idx": 28,
+              "line_no": 32,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "User changes their password on our side. Then they open your app. Your app bounces them to our IdP to authenticate. The IdP authenticates them just fine \u2014 new password, correct, no problem, IdP says \"yes, this is them.\" IdP sends them back to your app. And then your side immediately bounces them right back to the IdP again. And around, and around. Authenticate, return, bounce, authenticate, return, bounce. Infinite."
+            },
+            {
+              "turn_idx": 30,
+              "line_no": 34,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "That's it exactly. They never get in. Not \"logged in briefly then out\" \u2014 they never reach the app at all. It just spins between your login and our IdP until they give up."
+            },
+            {
+              "turn_idx": 34,
+              "line_no": 38,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "Clearing browser cookies for your domain breaks the loop. Once they wipe your cookies, they log in clean and they're fine. But that's a support call every single time \u2014 you can't tell four hundred people \"clear your cookies\" and expect that to scale."
+            },
+            {
+              "turn_idx": 40,
+              "line_no": 44,
+              "speaker": "Renee",
+              "side": "EXTERNAL",
+              "text": "Two \u2014 the symptom is the opposite shape. In the Okta issue, people are being logged out early but they can get back in. In ours, nobody is being logged out early at all \u2014 they can't get in in the first place after a password change. It's not a premature expiry, it's a hard redirect loop that blocks entry entirely until cookies are cleared. Early-logout-but-you-can-return versus cannot-enter-at-all. Different shape entirely."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [
+        {
+          "key": "PROJ-064",
+          "summary": "SSO session expires earlier than the configured lifetime for Okta-federated users",
+          "reason": "same area but symptom does not match (trigger 0.29, symptom 0.11)",
+          "similarity": 0.188,
+          "decided_by": "structured"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "fingerprint": "77739f30705da5d3",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Profile links in notification emails truncate at apostrophes in member names",
+      "component": "notifications-email",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "blocks a workflow but a workaround exists",
+      "body": "h2. What's happening\nProfile links in notification emails are cut off at the apostrophe in a member's name,\nso Maria O'Brien's link ends at /maria-o and lands on a 404. Deterministic: every\napostrophe name breaks, every plain name works. Thirty-one members affected in every\nnotification they receive, and they have learned to ignore notification links entirely.\n\nh2. Details\n* *Trigger:* generating a profile link for a member whose name contains an apostrophe\n* *Symptom:* the profile URL truncates at the apostrophe and the member lands on a 404\n* *Scope:* thirty-one members, in every notification email they receive\n* *Workaround:* navigate to the app manually instead of clicking the link\n* *Component:* notifications-email\n\nh2. Priority: P2\nblocks a workflow but a workaround exists\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Brightpath Insurance* -- Sofia, 2026-06-21 ([call-011|transcripts/call-011.md])\n{quote}Our employee population has a lot of names with apostrophes. We're an old East Coast insurer, so \u2014 O'Brien, D'Angelo, N'Diaye, O'Sullivan, we've got dozens. And when one of those members gets an email notification with a link to their own profile \u2014 session reminders, mostly, the \"you have a session tomorrow, click here\" emails \u2014 the link is broken.{quote}\n_transcripts/call-011.md:44 (turn 40)_\n{quote}It cuts off right at the apostrophe. So Maria O'Brien's profile link \u2014 it should be her full profile URL, but it ends at \"/maria-o\" and just stops. Everything after the apostrophe is gone. And \"/maria-o\" isn't a real page, so she lands on a 404.{quote}\n_transcripts/call-011.md:46 (turn 42)_\n{quote}That's my guess too, though I'm HRIS, not a web dev. But the pattern is airtight: apostrophe in the name, broken link, 404. Plain-name members \u2014 Smith, Johnson \u2014 their links work perfectly, every time. It's specifically the apostrophe names.{quote}\n_transcripts/call-011.md:48 (turn 44)_\n{quote}We count thirty-one members with apostrophes or similar characters in their names. And every one of them gets dead links in every notification email they receive. Not sometimes \u2014 every notification, every time, for all thirty-one.{quote}\n_transcripts/call-011.md:52 (turn 48)_\n{quote}Always. And here's the part that actually bothers me: they've learned to ignore the links. Maria knows her link is broken, so she doesn't click it, she just navigates to the app manually. Which means she's learned to ignore the notification. Which defeats the entire point of sending the notification. We're training thirty-one members to disregard our reminders because the reminders don't work for them.{quote}\n_transcripts/call-011.md:58 (turn 54)_\n\nh2. De-duplication\nChecked against these tracked issues and judged distinct:\n* PROJ-142 -- Password-reset emails delayed up to 30 minutes during peak hours\n** same area but symptom does not match (trigger 0.00, symptom 0.00) (similarity 0.0, by structured)\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-011.md_",
+      "sources": [
+        {
+          "call_id": "call-011",
+          "account": "Brightpath Insurance",
+          "date": "2026-06-21",
+          "reporter": "Sofia",
+          "transcript_path": "transcripts/call-011.md",
+          "snippets": [
+            {
+              "turn_idx": 40,
+              "line_no": 44,
+              "speaker": "Sofia",
+              "side": "EXTERNAL",
+              "text": "Our employee population has a lot of names with apostrophes. We're an old East Coast insurer, so \u2014 O'Brien, D'Angelo, N'Diaye, O'Sullivan, we've got dozens. And when one of those members gets an email notification with a link to their own profile \u2014 session reminders, mostly, the \"you have a session tomorrow, click here\" emails \u2014 the link is broken."
+            },
+            {
+              "turn_idx": 42,
+              "line_no": 46,
+              "speaker": "Sofia",
+              "side": "EXTERNAL",
+              "text": "It cuts off right at the apostrophe. So Maria O'Brien's profile link \u2014 it should be her full profile URL, but it ends at \"/maria-o\" and just stops. Everything after the apostrophe is gone. And \"/maria-o\" isn't a real page, so she lands on a 404."
+            },
+            {
+              "turn_idx": 44,
+              "line_no": 48,
+              "speaker": "Sofia",
+              "side": "EXTERNAL",
+              "text": "That's my guess too, though I'm HRIS, not a web dev. But the pattern is airtight: apostrophe in the name, broken link, 404. Plain-name members \u2014 Smith, Johnson \u2014 their links work perfectly, every time. It's specifically the apostrophe names."
+            },
+            {
+              "turn_idx": 48,
+              "line_no": 52,
+              "speaker": "Sofia",
+              "side": "EXTERNAL",
+              "text": "We count thirty-one members with apostrophes or similar characters in their names. And every one of them gets dead links in every notification email they receive. Not sometimes \u2014 every notification, every time, for all thirty-one."
+            },
+            {
+              "turn_idx": 54,
+              "line_no": 58,
+              "speaker": "Sofia",
+              "side": "EXTERNAL",
+              "text": "Always. And here's the part that actually bothers me: they've learned to ignore the links. Maria knows her link is broken, so she doesn't click it, she just navigates to the app manually. Which means she's learned to ignore the notification. Which defeats the entire point of sending the notification. We're training thirty-one members to disregard our reminders because the reminders don't work for them."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [
+        {
+          "key": "PROJ-142",
+          "summary": "Password-reset emails delayed up to 30 minutes during peak hours",
+          "reason": "same area but symptom does not match (trigger 0.00, symptom 0.00)",
+          "similarity": 0.0,
+          "decided_by": "structured"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "fingerprint": "f08cadf122952638",
+      "outcome": "file-new",
+      "type": "Feature",
+      "title": "Session-completed webhook event carrying member ID and timestamp",
+      "component": "webhooks",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "tied to a compliance or renewal driver",
+      "body": "h2. What's happening\nThe customer's LMS, Cornerstone, is their system of record for training compliance\nincluding OSHA. Participation is currently hand-keyed in monthly. Their integrations\nengineer asks for a session-completed webhook carrying the member ID and completion\ntimestamp so Cornerstone can record participation automatically.\n\nh2. Details\n* *Trigger:* a member completing a training session\n* *Symptom:* no session-completed event is emitted so participation must be hand-keyed into the LMS\n* *Scope:* all training participation records for compliance reporting\n* *Workaround:* manual monthly data entry into Cornerstone\n* *Component:* webhooks\n\nh2. Priority: P2\ntied to a compliance or renewal driver\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Ridgeway Manufacturing* -- Hank, 2026-06-22 ([call-013|transcripts/call-013.md])\n{quote}Exactly. Corporate decided the therapy-dog and workplace-safety certification sessions count as professional development, which means they need to show up in the system of record alongside everything else. Right now that's a monthly manual entry job \u2014 someone on my team exports participation from your side and hand-keys it into Cornerstone. It's tedious and it's error-prone.{quote}\n_transcripts/call-013.md:42 (turn 38)_\n{quote}Right. And my integrations guy was specific about what he needs, so let me relay it precisely \u2014 he wrote it down for me. He said, quote: \"Ask if they can send a session-completed webhook with the member ID and timestamp; we'll do the rest.\" That's the ask. When a member completes a training session, your system fires an event to us \u2014 a webhook \u2014 carrying the member ID and the completion timestamp, and Cornerstone consumes it and records the participation automatically.{quote}\n_transcripts/call-013.md:44 (turn 40)_\n{quote}That's it word for word. Member ID, timestamp, on session completion. He said he'll handle the Cornerstone side, he just needs us to emit the event.{quote}\n_transcripts/call-013.md:46 (turn 42)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-013.md_",
+      "sources": [
+        {
+          "call_id": "call-013",
+          "account": "Ridgeway Manufacturing",
+          "date": "2026-06-22",
+          "reporter": "Hank",
+          "transcript_path": "transcripts/call-013.md",
+          "snippets": [
+            {
+              "turn_idx": 38,
+              "line_no": 42,
+              "speaker": "Hank",
+              "side": "EXTERNAL",
+              "text": "Exactly. Corporate decided the therapy-dog and workplace-safety certification sessions count as professional development, which means they need to show up in the system of record alongside everything else. Right now that's a monthly manual entry job \u2014 someone on my team exports participation from your side and hand-keys it into Cornerstone. It's tedious and it's error-prone."
+            },
+            {
+              "turn_idx": 40,
+              "line_no": 44,
+              "speaker": "Hank",
+              "side": "EXTERNAL",
+              "text": "Right. And my integrations guy was specific about what he needs, so let me relay it precisely \u2014 he wrote it down for me. He said, quote: \"Ask if they can send a session-completed webhook with the member ID and timestamp; we'll do the rest.\" That's the ask. When a member completes a training session, your system fires an event to us \u2014 a webhook \u2014 carrying the member ID and the completion timestamp, and Cornerstone consumes it and records the participation automatically."
+            },
+            {
+              "turn_idx": 42,
+              "line_no": 46,
+              "speaker": "Hank",
+              "side": "EXTERNAL",
+              "text": "That's it word for word. Member ID, timestamp, on session completion. He said he'll handle the Cornerstone side, he just needs us to emit the event."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "12ca753b160f7323",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Deactivating a member mid-session strands the mobile app on a blank white screen",
+      "component": "other",
+      "priority": "P3",
+      "severity": "trivial",
+      "priority_rationale": "no data-correctness, workflow-blocking or compliance impact identified",
+      "body": "h2. What's happening\nWhen an admin deactivates a member who has an active mobile session, the app goes to a\nblank white screen with no message and does not recover. Force-quitting and reopening\nfinally shows the correct 'account inactive' screen. Six or seven hit this during the\nMay seasonal deactivation batch and two called the helpdesk believing the app was\nbroken.\n\nh2. Details\n* *Trigger:* deactivating a member who has an active mobile session open\n* *Symptom:* the mobile app goes to a blank white screen and does not route to the account inactive screen\n* *Scope:* members deactivated while mid-session; six or seven in the May batch\n* *Workaround:* force-quit and reopen the app\n* *Component:* other\n\nh2. Priority: P3\nno data-correctness, workflow-blocking or compliance impact identified\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Sunrise Hospitality* -- Gloria, 2026-06-22 ([call-014|transcripts/call-014.md])\n{quote}When an admin deactivates a member while that member happens to be in the app \u2014 like, actively using it, mid-session on their phone \u2014 the app doesn't handle it gracefully. It goes to a blank white screen. No message, no \"your account has been deactivated,\" no logout, no nothing. Just a white screen. A void.{quote}\n_transcripts/call-014.md:42 (turn 38)_\n{quote}White. Blank. And it stays white \u2014 it doesn't recover on its own. What fixes it is force-quitting the app and reopening it, and then you finally get the \"account inactive\" screen, which is the thing that should have appeared in the first place. The correct screen exists. The app just doesn't get you there if you were mid-session when the deactivation hit \u2014 it strands you on white until you force-quit.{quote}\n_transcripts/call-014.md:44 (turn 40)_\n{quote}We know of six or seven, all during the May deactivation batch. It's not a huge number. But two of them called our IT helpdesk saying the app was \"broken\" \u2014 they didn't know they'd been deactivated, they just saw their app die into a white screen and assumed it crashed. That's how it climbed up to my ops manager, through IT tickets.{quote}\n_transcripts/call-014.md:46 (turn 42)_\n{quote}Right, and here's why it bugs me more than the number suggests. It's not the volume \u2014 six or seven isn't a crisis. It's that a blank white screen with no explanation is the worst possible goodbye. These are seasonal staff we genuinely want back next season. We invest in rehiring the good ones. And their last interaction with our tooling was a white void that made them think something was broken. That's a terrible final impression to leave with someone you're hoping returns.{quote}\n_transcripts/call-014.md:48 (turn 44)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-014.md_",
+      "sources": [
+        {
+          "call_id": "call-014",
+          "account": "Sunrise Hospitality",
+          "date": "2026-06-22",
+          "reporter": "Gloria",
+          "transcript_path": "transcripts/call-014.md",
+          "snippets": [
+            {
+              "turn_idx": 38,
+              "line_no": 42,
+              "speaker": "Gloria",
+              "side": "EXTERNAL",
+              "text": "When an admin deactivates a member while that member happens to be in the app \u2014 like, actively using it, mid-session on their phone \u2014 the app doesn't handle it gracefully. It goes to a blank white screen. No message, no \"your account has been deactivated,\" no logout, no nothing. Just a white screen. A void."
+            },
+            {
+              "turn_idx": 40,
+              "line_no": 44,
+              "speaker": "Gloria",
+              "side": "EXTERNAL",
+              "text": "White. Blank. And it stays white \u2014 it doesn't recover on its own. What fixes it is force-quitting the app and reopening it, and then you finally get the \"account inactive\" screen, which is the thing that should have appeared in the first place. The correct screen exists. The app just doesn't get you there if you were mid-session when the deactivation hit \u2014 it strands you on white until you force-quit."
+            },
+            {
+              "turn_idx": 42,
+              "line_no": 46,
+              "speaker": "Gloria",
+              "side": "EXTERNAL",
+              "text": "We know of six or seven, all during the May deactivation batch. It's not a huge number. But two of them called our IT helpdesk saying the app was \"broken\" \u2014 they didn't know they'd been deactivated, they just saw their app die into a white screen and assumed it crashed. That's how it climbed up to my ops manager, through IT tickets."
+            },
+            {
+              "turn_idx": 44,
+              "line_no": 48,
+              "speaker": "Gloria",
+              "side": "EXTERNAL",
+              "text": "Right, and here's why it bugs me more than the number suggests. It's not the volume \u2014 six or seven isn't a crisis. It's that a blank white screen with no explanation is the worst possible goodbye. These are seasonal staff we genuinely want back next season. We invest in rehiring the good ones. And their last interaction with our tooling was a white void that made them think something was broken. That's a terrible final impression to leave with someone you're hoping returns."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "a3509ddfaf9e964e",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Fine, genuinely fine",
+      "component": "other",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "tied to a compliance or renewal driver",
+      "body": "h2. What's happening\nFine, genuinely fine. We've got about 400 people enrolled, mostly claims and\nunderwriting managers. Usage is steady, no complaints about the coaches. I'm the systems\nperson, not the program person, so I mostly hear about it when something breaks.\n\nh2. Details\n* *Trigger:* genuinely fine\n* *Symptom:* We've got about 400 people enrolled\n* *Scope:* reported by the external participant on this call\n* *Workaround:* none reported\n* *Component:* other\n\nh2. Priority: P2\ntied to a compliance or renewal driver\n_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Pemrose Insurance* -- Gloria, 2026-06-22 ([call-034|transcripts/call-034.md])\n{quote}Fine, genuinely fine. We've got about 400 people enrolled, mostly claims and underwriting managers. Usage is steady, no complaints about the coaches. I'm the systems person, not the program person, so I mostly hear about it when something breaks.{quote}\n_transcripts/call-034.md:10 (turn 6)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-034.md_",
+      "sources": [
+        {
+          "call_id": "call-034",
+          "account": "Pemrose Insurance",
+          "date": "2026-06-22",
+          "reporter": "Gloria",
+          "transcript_path": "transcripts/call-034.md",
+          "snippets": [
+            {
+              "turn_idx": 6,
+              "line_no": 10,
+              "speaker": "Gloria",
+              "side": "EXTERNAL",
+              "text": "Fine, genuinely fine. We've got about 400 people enrolled, mostly claims and underwriting managers. Usage is steady, no complaints about the coaches. I'm the systems person, not the program person, so I mostly hear about it when something breaks."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "9e7b7c573a08aaef",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Exactly that. And here's the thing",
+      "component": "notifications-email",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "shows incorrect data; wrong numbers leave the product and get reported onward",
+      "body": "h2. What's happening\nExactly that. And here's the thing \u2014 it wouldn't just save them time. Right now, because\nit's manual, half of them do it wrong. They screenshot the wrong date range, or they\nretype a number with a typo, and then I'm getting emails from regional directors going\n\"why does Practice 12's number not match what Nadia sent.\" The manual step introduces\nerrors that make the whole program look sloppy.\n\nh2. Details\n* *Trigger:* And here's the thing\n* *Symptom:* it wouldn't just save them time\n* *Scope:* reported by the external participant on this call\n* *Workaround:* stated on the call\n* *Component:* notifications-email\n\nh2. Priority: P2\nshows incorrect data; wrong numbers leave the product and get reported onward\n_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Crescent Dental Group* -- Nadia, 2026-06-23 ([call-063|transcripts/call-063.md])\n{quote}Exactly that. And here's the thing \u2014 it wouldn't just save them time. Right now, because it's manual, half of them do it wrong. They screenshot the wrong date range, or they retype a number with a typo, and then I'm getting emails from regional directors going \"why does Practice 12's number not match what Nadia sent.\" The manual step introduces errors that make the whole program look sloppy.{quote}\n_transcripts/call-063.md:26 (turn 22)_\n\nh2. De-duplication\nChecked against these tracked issues and judged distinct:\n* PROJ-142 -- Password-reset emails delayed up to 30 minutes during peak hours\n** same area but symptom does not match (trigger 0.00, symptom 0.00) (similarity 0.0, by structured)\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-063.md_",
+      "sources": [
+        {
+          "call_id": "call-063",
+          "account": "Crescent Dental Group",
+          "date": "2026-06-23",
+          "reporter": "Nadia",
+          "transcript_path": "transcripts/call-063.md",
+          "snippets": [
+            {
+              "turn_idx": 22,
+              "line_no": 26,
+              "speaker": "Nadia",
+              "side": "EXTERNAL",
+              "text": "Exactly that. And here's the thing \u2014 it wouldn't just save them time. Right now, because it's manual, half of them do it wrong. They screenshot the wrong date range, or they retype a number with a typo, and then I'm getting emails from regional directors going \"why does Practice 12's number not match what Nadia sent.\" The manual step introduces errors that make the whole program look sloppy."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [
+        {
+          "key": "PROJ-142",
+          "summary": "Password-reset emails delayed up to 30 minutes during peak hours",
+          "reason": "same area but symptom does not match (trigger 0.00, symptom 0.00)",
+          "similarity": 0.0,
+          "decided_by": "structured"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "fingerprint": "9f9da22a4617d52d",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Exactly that. Stale for about ten minutes and then it sorts itself out. Same thing when",
+      "component": "search",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "tied to a compliance or renewal driver",
+      "body": "h2. What's happening\nExactly that. Stale for about ten minutes and then it sorts itself out. Same thing when\nI move a person from one team to another \u2014 search shows them on the old team for a bit.\n\nh2. Details\n* *Trigger:* Stale for about ten minutes and then it sorts itself out\n* *Symptom:* Same thing when I move a person from one team to another\n* *Scope:* reported by the external participant on this call\n* *Workaround:* none reported\n* *Component:* search\n\nh2. Priority: P2\ntied to a compliance or renewal driver\n_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Copperline Energy* -- Gerald Voss, 2026-06-16 ([call-072|transcripts/call-072.md])\n{quote}Exactly that. Stale for about ten minutes and then it sorts itself out. Same thing when I move a person from one team to another \u2014 search shows them on the old team for a bit.{quote}\n_transcripts/call-072.md:35 (turn 31)_\n\nh2. De-duplication\nChecked against these tracked issues and judged distinct:\n* PROJ-131 -- Newly invited members not searchable until the following day\n** same area but symptom does not match (trigger 0.00, symptom 0.00) (similarity 0.0, by structured)\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-072.md_",
+      "sources": [
+        {
+          "call_id": "call-072",
+          "account": "Copperline Energy",
+          "date": "2026-06-16",
+          "reporter": "Gerald Voss",
+          "transcript_path": "transcripts/call-072.md",
+          "snippets": [
+            {
+              "turn_idx": 31,
+              "line_no": 35,
+              "speaker": "Gerald Voss",
+              "side": "EXTERNAL",
+              "text": "Exactly that. Stale for about ten minutes and then it sorts itself out. Same thing when I move a person from one team to another \u2014 search shows them on the old team for a bit."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [
+        {
+          "key": "PROJ-131",
+          "summary": "Newly invited members not searchable until the following day",
+          "reason": "same area but symptom does not match (trigger 0.00, symptom 0.00)",
+          "similarity": 0.0,
+          "decided_by": "structured"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "fingerprint": "7bcfcea7e3395ab9",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "That's what's weird",
+      "component": "scheduling",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "shows incorrect data; wrong numbers leave the product and get reported onward",
+      "body": "h2. What's happening\nThat's what's weird. Our Ping session lifetime is set to 12 hours, so I'd expect a re-\nauth prompt at 12 hours. The 24-hour lockout doesn't match any timeout we've configured\nanywhere. It's like BetterBark has its own 24-hour hard cap that fires independently and\nthen poisons the account instead of just ending the session.\n\nh2. Details\n* *Trigger:* That's what's weird\n* *Symptom:* Our Ping session lifetime is set to 12 hours\n* *Scope:* reported by the external participant on this call\n* *Workaround:* none reported\n* *Component:* scheduling\n\nh2. Priority: P2\nshows incorrect data; wrong numbers leave the product and get reported onward\n_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Beaumont Insurance* -- Susan, 2026-06-18 ([call-088|transcripts/call-088.md])\n{quote}That's what's weird. Our Ping session lifetime is set to 12 hours, so I'd expect a re-auth prompt at 12 hours. The 24-hour lockout doesn't match any timeout we've configured anywhere. It's like BetterBark has its own 24-hour hard cap that fires independently and then poisons the account instead of just ending the session.{quote}\n_transcripts/call-088.md:26 (turn 22)_\n\nh2. De-duplication\nChecked against these tracked issues and judged distinct:\n* PROJ-064 -- SSO session expires earlier than the configured lifetime for Okta-federated users\n** same area but trigger does not match (trigger 0.00, symptom 0.40) (similarity 0.333, by structured)\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-088.md_",
+      "sources": [
+        {
+          "call_id": "call-088",
+          "account": "Beaumont Insurance",
+          "date": "2026-06-18",
+          "reporter": "Susan",
+          "transcript_path": "transcripts/call-088.md",
+          "snippets": [
+            {
+              "turn_idx": 22,
+              "line_no": 26,
+              "speaker": "Susan",
+              "side": "EXTERNAL",
+              "text": "That's what's weird. Our Ping session lifetime is set to 12 hours, so I'd expect a re-auth prompt at 12 hours. The 24-hour lockout doesn't match any timeout we've configured anywhere. It's like BetterBark has its own 24-hour hard cap that fires independently and then poisons the account instead of just ending the session."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [
+        {
+          "key": "PROJ-064",
+          "summary": "SSO session expires earlier than the configured lifetime for Okta-federated users",
+          "reason": "same area but trigger does not match (trigger 0.00, symptom 0.40)",
+          "similarity": 0.333,
+          "decided_by": "structured"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "fingerprint": "81d9886eda4764ca",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "CSV with a header row, comma-delimited, UTF-8, quoted strings. Boring and universal. My",
+      "component": "exports",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "shows incorrect data; wrong numbers leave the product and get reported onward",
+      "body": "h2. What's happening\nCSV with a header row, comma-delimited, UTF-8, quoted strings. Boring and universal. My\nloader eats that without complaint. I'd want the schema stable \u2014 same columns, same\norder, every night \u2014 because if the columns shift, my ingestion breaks silently and I\nfind out three days later when a report looks wrong.\n\nh2. Details\n* *Trigger:* CSV with a header row\n* *Symptom:* comma-delimited\n* *Scope:* reported by the external participant on this call\n* *Workaround:* none reported\n* *Component:* exports\n\nh2. Priority: P2\nshows incorrect data; wrong numbers leave the product and get reported onward\n_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Bancroft Mills* -- Wade, 2026-06-25 ([call-107|transcripts/call-107.md])\n{quote}CSV with a header row, comma-delimited, UTF-8, quoted strings. Boring and universal. My loader eats that without complaint. I'd want the schema stable \u2014 same columns, same order, every night \u2014 because if the columns shift, my ingestion breaks silently and I find out three days later when a report looks wrong.{quote}\n_transcripts/call-107.md:41 (turn 37)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-107.md_",
+      "sources": [
+        {
+          "call_id": "call-107",
+          "account": "Bancroft Mills",
+          "date": "2026-06-25",
+          "reporter": "Wade",
+          "transcript_path": "transcripts/call-107.md",
+          "snippets": [
+            {
+              "turn_idx": 37,
+              "line_no": 41,
+              "speaker": "Wade",
+              "side": "EXTERNAL",
+              "text": "CSV with a header row, comma-delimited, UTF-8, quoted strings. Boring and universal. My loader eats that without complaint. I'd want the schema stable \u2014 same columns, same order, every night \u2014 because if the columns shift, my ingestion breaks silently and I find out three days later when a report looks wrong."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "8bc7fa2489847599",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Honestly? I think it's more shiny than real",
+      "component": "scheduling",
+      "priority": "P3",
+      "severity": "trivial",
+      "priority_rationale": "no data-correctness, workflow-blocking or compliance impact identified",
+      "body": "h2. What's happening\nHonestly? I think it's more shiny than real. Our members book sessions in advance,\nthey're not sitting there at 3am needing live chat about their coaching. But my CHRO\nheard \"twenty-four-seven\" and it stuck.\n\nh2. Details\n* *Trigger:* Honestly? I think it's more shiny than real\n* *Symptom:* Our members book sessions in advance\n* *Scope:* reported by the external participant on this call\n* *Workaround:* none reported\n* *Component:* scheduling\n\nh2. Priority: P3\nno data-correctness, workflow-blocking or compliance impact identified\n_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Oakhaven Senior Living* -- Constance Reyes, 2026-06-25 ([call-123|transcripts/call-123.md])\n{quote}Honestly? I think it's more shiny than real. Our members book sessions in advance, they're not sitting there at 3am needing live chat about their coaching. But my CHRO heard \"twenty-four-seven\" and it stuck.{quote}\n_transcripts/call-123.md:38 (turn 34)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-123.md_",
+      "sources": [
+        {
+          "call_id": "call-123",
+          "account": "Oakhaven Senior Living",
+          "date": "2026-06-25",
+          "reporter": "Constance Reyes",
+          "transcript_path": "transcripts/call-123.md",
+          "snippets": [
+            {
+              "turn_idx": 34,
+              "line_no": 38,
+              "speaker": "Constance Reyes",
+              "side": "EXTERNAL",
+              "text": "Honestly? I think it's more shiny than real. Our members book sessions in advance, they're not sitting there at 3am needing live chat about their coaching. But my CHRO heard \"twenty-four-seven\" and it stuck."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "4282b074a0e4d509",
+      "outcome": "file-new",
+      "type": "Feature",
+      "title": "Right. And what I'd love",
+      "component": "calendar",
+      "priority": "P3",
+      "severity": "trivial",
+      "priority_rationale": "no data-correctness, workflow-blocking or compliance impact identified",
+      "body": "h2. What's happening\nRight. And what I'd love \u2014 and this is my ask \u2014 is for the coach's calendar hold to\nauto-release if the member no-shows, say, ten minutes in. Give the person a ten-minute\ngrace window, sure, people run late. But if they haven't joined after ten minutes, free\nup the rest of that slot so it can go back into availability. Then someone else can book\nit, or the coach can reclaim the time.\n\nh2. Details\n* *Trigger:* And what I'd love\n* *Symptom:* and this is my ask\n* *Scope:* reported by the external participant on this call\n* *Workaround:* none reported\n* *Component:* calendar\n\nh2. Priority: P3\nno data-correctness, workflow-blocking or compliance impact identified\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Fairbanks Consulting* -- Owen, 2026-06-29 ([call-132|transcripts/call-132.md])\n{quote}Right. And what I'd love \u2014 and this is my ask \u2014 is for the coach's calendar hold to auto-release if the member no-shows, say, ten minutes in. Give the person a ten-minute grace window, sure, people run late. But if they haven't joined after ten minutes, free up the rest of that slot so it can go back into availability. Then someone else can book it, or the coach can reclaim the time.{quote}\n_transcripts/call-132.md:43 (turn 39)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-132.md_",
+      "sources": [
+        {
+          "call_id": "call-132",
+          "account": "Fairbanks Consulting",
+          "date": "2026-06-29",
+          "reporter": "Owen",
+          "transcript_path": "transcripts/call-132.md",
+          "snippets": [
+            {
+              "turn_idx": 39,
+              "line_no": 43,
+              "speaker": "Owen",
+              "side": "EXTERNAL",
+              "text": "Right. And what I'd love \u2014 and this is my ask \u2014 is for the coach's calendar hold to auto-release if the member no-shows, say, ten minutes in. Give the person a ten-minute grace window, sure, people run late. But if they haven't joined after ten minutes, free up the rest of that slot so it can go back into availability. Then someone else can book it, or the coach can reclaim the time."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "910d10d46d8d8cb6",
+      "outcome": "file-new",
+      "type": "Bug",
+      "title": "Exactly. And here's the part that bugs me",
+      "component": "scheduling",
+      "priority": "P3",
+      "severity": "trivial",
+      "priority_rationale": "no data-correctness, workflow-blocking or compliance impact identified",
+      "body": "h2. What's happening\nExactly. And here's the part that bugs me \u2014 I have other consultants who would happily\ngrab that slot. Like, I'll have someone messaging me saying \"can I get a session this\nweek, I'm slammed but I have a gap Thursday at 2,\" and there's a coach sitting alone in\nan empty video room at Thursday at 2 because someone else no-showed. But the system has\nthat slot locked to the no-show for the whole hour,\n\nh2. Details\n* *Trigger:* And here's the part that bugs me\n* *Symptom:* I have other consultants who would happily grab that slot\n* *Scope:* reported by the external participant on this call\n* *Workaround:* none reported\n* *Component:* scheduling\n\nh2. Priority: P3\nno data-correctness, workflow-blocking or compliance impact identified\n_Note: the customer framed this as high urgency. Priority is set from measured impact, not from how it was raised. Override at review if the relationship context warrants it._\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Fairbanks Consulting* -- Owen, 2026-06-29 ([call-132|transcripts/call-132.md])\n{quote}Exactly. And here's the part that bugs me \u2014 I have other consultants who would happily grab that slot. Like, I'll have someone messaging me saying \"can I get a session this week, I'm slammed but I have a gap Thursday at 2,\" and there's a coach sitting alone in an empty video room at Thursday at 2 because someone else no-showed. But the system has that slot locked to the no-show for the whole hour, so nobody can claim it.{quote}\n_transcripts/call-132.md:41 (turn 37)_\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-132.md_",
+      "sources": [
+        {
+          "call_id": "call-132",
+          "account": "Fairbanks Consulting",
+          "date": "2026-06-29",
+          "reporter": "Owen",
+          "transcript_path": "transcripts/call-132.md",
+          "snippets": [
+            {
+              "turn_idx": 37,
+              "line_no": 41,
+              "speaker": "Owen",
+              "side": "EXTERNAL",
+              "text": "Exactly. And here's the part that bugs me \u2014 I have other consultants who would happily grab that slot. Like, I'll have someone messaging me saying \"can I get a session this week, I'm slammed but I have a gap Thursday at 2,\" and there's a coach sitting alone in an empty video room at Thursday at 2 because someone else no-showed. But the system has that slot locked to the no-show for the whole hour, so nobody can claim it."
+            }
+          ]
+        }
+      ],
+      "dedup_target": null,
+      "dedup_rationale": "",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "141ec672024818c2",
+      "outcome": "corroborate",
+      "type": "Bug",
+      "title": "Scheduled report timestamps render seven hours ahead of the workspace timezone",
+      "component": "reporting",
+      "priority": "P1",
+      "severity": "major",
+      "priority_rationale": "shows incorrect data org-wide",
+      "body": "h2. What's happening\nScheduled reports arrive with timestamps about seven hours ahead of Pacific, consistent\nwith UTC rendering rather than the workspace timezone. The in-app dashboard is correct;\nonly the emailed scheduled report is shifted. Directors read the numbers against the\nschool day and conclude the data is wrong.\n\nh2. Details\n* *Trigger:* scheduled report emailed as a PDF\n* *Symptom:* timestamps display in UTC instead of the workspace timezone, about seven hours ahead\n* *Scope:* all scheduled reports for this Pacific workspace\n* *Workaround:* mentally subtract seven hours\n* *Component:* reporting\n\nh2. Priority: P1\nshows incorrect data org-wide\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Cedar Grove Schools* -- Will, 2026-06-17 ([call-004|transcripts/call-004.md])\n{quote}Main thing, and it's the one that's been generating email: the scheduled reports are coming in at a weird time, and the timestamps inside them are off.{quote}\n_transcripts/call-004.md:24 (turn 20)_\n{quote}Looks like about seven hours ahead of us. We're Pacific. A report that should say 9am shows up stamped around 4pm. So the timestamps inside the report just don't match when things actually happened in our day.{quote}\n_transcripts/call-004.md:26 (turn 22)_\n{quote}Both, kind of. The email lands at an odd hour and the timestamps inside are shifted the same way. My directors read the weekly numbers against the school day \u2014 like, \"how many sessions happened during the workday versus after\" \u2014 so when the timestamps don't line up with reality, they think the data itself is wrong. And then I get three confused emails asking why sessions are happening at midnight.{quote}\n_transcripts/call-004.md:28 (turn 24)_\n{quote}Good question \u2014 the in-app dashboard looks right to me. It's the scheduled report, the one that gets emailed out as a PDF, that's off. The live view seems fine.{quote}\n_transcripts/call-004.md:34 (turn 30)_\n\nh2. Relates to PROJ-101\nduplicate of PROJ-101 (In Progress): trigger (1.00) and symptom (0.78) both match [decided by structured]\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-004.md_",
+      "sources": [
+        {
+          "call_id": "call-004",
+          "account": "Cedar Grove Schools",
+          "date": "2026-06-17",
+          "reporter": "Will",
+          "transcript_path": "transcripts/call-004.md",
+          "snippets": [
+            {
+              "turn_idx": 20,
+              "line_no": 24,
+              "speaker": "Will",
+              "side": "EXTERNAL",
+              "text": "Main thing, and it's the one that's been generating email: the scheduled reports are coming in at a weird time, and the timestamps inside them are off."
+            },
+            {
+              "turn_idx": 22,
+              "line_no": 26,
+              "speaker": "Will",
+              "side": "EXTERNAL",
+              "text": "Looks like about seven hours ahead of us. We're Pacific. A report that should say 9am shows up stamped around 4pm. So the timestamps inside the report just don't match when things actually happened in our day."
+            },
+            {
+              "turn_idx": 24,
+              "line_no": 28,
+              "speaker": "Will",
+              "side": "EXTERNAL",
+              "text": "Both, kind of. The email lands at an odd hour and the timestamps inside are shifted the same way. My directors read the weekly numbers against the school day \u2014 like, \"how many sessions happened during the workday versus after\" \u2014 so when the timestamps don't line up with reality, they think the data itself is wrong. And then I get three confused emails asking why sessions are happening at midnight."
+            },
+            {
+              "turn_idx": 30,
+              "line_no": 34,
+              "speaker": "Will",
+              "side": "EXTERNAL",
+              "text": "Good question \u2014 the in-app dashboard looks right to me. It's the scheduled report, the one that gets emailed out as a PDF, that's off. The live view seems fine."
+            }
+          ]
+        }
+      ],
+      "dedup_target": "PROJ-101",
+      "dedup_rationale": "duplicate of PROJ-101 (In Progress): trigger (1.00) and symptom (0.78) both match [decided by structured]",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "1142ed602851ae20",
+      "outcome": "corroborate",
+      "type": "Bug",
+      "title": "Duplicate webhook deliveries with no idempotency key to de-duplicate against",
+      "component": "webhooks",
+      "priority": "P3",
+      "severity": "trivial",
+      "priority_rationale": "no data-correctness, workflow-blocking or compliance impact identified",
+      "body": "h2. What's happening\nThe customer's data platform receives the same webhook event more than once,\nintermittently. Their pipeline de-duplicates heuristically on payload content and\ntiming. Their platform engineer asks for an idempotency key on the payload so\nredeliveries can be dropped deterministically.\n\nh2. Details\n* *Trigger:* outbound webhook delivery to the customer endpoint\n* *Symptom:* the same event is delivered more than once, occasionally and unpredictably\n* *Scope:* all webhook consumers on this account\n* *Workaround:* heuristic de-duplication on payload contents in the customer's pipeline\n* *Component:* webhooks\n\nh2. Priority: P3\nno data-correctness, workflow-blocking or compliance impact identified\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Vanta Retail* -- Jordan, 2026-06-18 ([call-005|transcripts/call-005.md])\n{quote}We consume your webhooks into our internal data platform \u2014 session events, membership changes, that kind of thing. Devraj's team says some events are being delivered twice. Same event, two deliveries, occasionally. Not every event, not on a schedule he can predict, just... sometimes the same one shows up twice.{quote}\n_transcripts/call-005.md:38 (turn 34)_\n{quote}Their pipeline mostly dedupes it already \u2014 they've got logic that catches most of the doubles. But \"mostly\" is doing a lot of work in that sentence, and Devraj hates heuristic dedup. His actual ask, and I wrote it down so I'd get it right: can you put idempotency keys on the webhook payload, so his team can dedupe deterministically instead of guessing based on content and timing?{quote}\n_transcripts/call-005.md:40 (turn 36)_\n{quote}Exactly. Right now he's fingerprinting the payload contents and hoping two genuinely-distinct events never look identical, which he describes as \"a bug waiting to happen.\"{quote}\n_transcripts/call-005.md:42 (turn 38)_\n\nh2. Relates to PROJ-087\nduplicate of PROJ-087 (In Progress): Identical trigger (outbound webhook delivery) and identical symptom (duplicate delivery of the same event); the wording differs but the defect does not. [decided by model]\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-005.md_",
+      "sources": [
+        {
+          "call_id": "call-005",
+          "account": "Vanta Retail",
+          "date": "2026-06-18",
+          "reporter": "Jordan",
+          "transcript_path": "transcripts/call-005.md",
+          "snippets": [
+            {
+              "turn_idx": 34,
+              "line_no": 38,
+              "speaker": "Jordan",
+              "side": "EXTERNAL",
+              "text": "We consume your webhooks into our internal data platform \u2014 session events, membership changes, that kind of thing. Devraj's team says some events are being delivered twice. Same event, two deliveries, occasionally. Not every event, not on a schedule he can predict, just... sometimes the same one shows up twice."
+            },
+            {
+              "turn_idx": 36,
+              "line_no": 40,
+              "speaker": "Jordan",
+              "side": "EXTERNAL",
+              "text": "Their pipeline mostly dedupes it already \u2014 they've got logic that catches most of the doubles. But \"mostly\" is doing a lot of work in that sentence, and Devraj hates heuristic dedup. His actual ask, and I wrote it down so I'd get it right: can you put idempotency keys on the webhook payload, so his team can dedupe deterministically instead of guessing based on content and timing?"
+            },
+            {
+              "turn_idx": 38,
+              "line_no": 42,
+              "speaker": "Jordan",
+              "side": "EXTERNAL",
+              "text": "Exactly. Right now he's fingerprinting the payload contents and hoping two genuinely-distinct events never look identical, which he describes as \"a bug waiting to happen.\""
+            }
+          ]
+        }
+      ],
+      "dedup_target": "PROJ-087",
+      "dedup_rationale": "duplicate of PROJ-087 (In Progress): Identical trigger (outbound webhook delivery) and identical symptom (duplicate delivery of the same event); the wording differs but the defect does not. [decided by model]",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "0062a7fd5226a71b",
+      "outcome": "corroborate",
+      "type": "Bug",
+      "title": "Android app crashes on launch after the latest update",
+      "component": "mobile-android",
+      "priority": "P0",
+      "severity": "critical",
+      "priority_rationale": "blocks a workflow org-wide with no workaround",
+      "body": "h2. What's happening\nWarehouse staff on Android who took the latest app update cannot open the app: it shows\nthe splash screen then returns to the home screen, never reaching login. Android users\nwho have not updated are fine and iOS is unaffected. About a dozen reported, likely\ntriple that given this population rarely reports.\n\nh2. Details\n* *Trigger:* launching the Android app after taking the latest update\n* *Symptom:* the app crashes on launch at the splash screen and never reaches login\n* *Scope:* Android users who have updated; iOS unaffected\n* *Workaround:* do not update, or reinstall the previous version\n* *Component:* mobile-android\n\nh2. Priority: P0\nblocks a workflow org-wide with no workaround\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Northwind Logistics* -- Marcus, 2026-06-19 ([call-008|transcripts/call-008.md])\n{quote}Real one first. A bunch of our warehouse folks on Android say the app won't open anymore. It crashes the second they tap the icon. Like, splash screen, then straight back to the home screen. Doesn't even get to the login.{quote}\n_transcripts/call-008.md:18 (turn 14)_\n{quote}Right after the last app update. That's the pattern. The ones who updated are the ones crashing. The ones who haven't updated yet are totally fine. And the iPhone people are all fine across the board.{quote}\n_transcripts/call-008.md:20 (turn 16)_\n{quote}A dozen or so have actually reached me. But here's the thing you have to understand about warehouse workers \u2014 that dozen means the real number is triple that, easy.{quote}\n_transcripts/call-008.md:24 (turn 20)_\n{quote}Warehouse folks don't file tickets. If an app doesn't open, they don't email HR about it, they just... stop using it. They've got a job to do on a clock. A broken app isn't a problem they escalate, it's a thing they shrug at and move on from. So for every one who bothered to tell me, there are two or three who just quietly stopped opening it and I'll never hear from them.{quote}\n_transcripts/call-008.md:26 (turn 22)_\n\nh2. Relates to PROJ-110\nduplicate of PROJ-110 (Open): Same trigger (launching the Android app after the update) and same observable failure (crash before reaching login); a second account on the tracked 4.2 crash. [decided by model]\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-008.md_",
+      "sources": [
+        {
+          "call_id": "call-008",
+          "account": "Northwind Logistics",
+          "date": "2026-06-19",
+          "reporter": "Marcus",
+          "transcript_path": "transcripts/call-008.md",
+          "snippets": [
+            {
+              "turn_idx": 14,
+              "line_no": 18,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "Real one first. A bunch of our warehouse folks on Android say the app won't open anymore. It crashes the second they tap the icon. Like, splash screen, then straight back to the home screen. Doesn't even get to the login."
+            },
+            {
+              "turn_idx": 16,
+              "line_no": 20,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "Right after the last app update. That's the pattern. The ones who updated are the ones crashing. The ones who haven't updated yet are totally fine. And the iPhone people are all fine across the board."
+            },
+            {
+              "turn_idx": 20,
+              "line_no": 24,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "A dozen or so have actually reached me. But here's the thing you have to understand about warehouse workers \u2014 that dozen means the real number is triple that, easy."
+            },
+            {
+              "turn_idx": 22,
+              "line_no": 26,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "Warehouse folks don't file tickets. If an app doesn't open, they don't email HR about it, they just... stop using it. They've got a job to do on a clock. A broken app isn't a problem they escalate, it's a thing they shrug at and move on from. So for every one who bothered to tell me, there are two or three who just quietly stopped opening it and I'll never hear from them."
+            }
+          ]
+        }
+      ],
+      "dedup_target": "PROJ-110",
+      "dedup_rationale": "duplicate of PROJ-110 (Open): Same trigger (launching the Android app after the update) and same observable failure (crash before reaching login); a second account on the tracked 4.2 crash. [decided by model]",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "95bb9c242d21aba1",
+      "outcome": "already-shipped",
+      "type": "Feature",
+      "title": "Bulk CSV export of the full member roster",
+      "component": "exports",
+      "priority": "P2",
+      "severity": "minor",
+      "priority_rationale": "blocks a workflow but a workaround exists",
+      "body": "h2. What's happening\nCustomer asks for a one-click export of the full member roster for their annual training\naudit, because a coordinator currently pages through the member list and copies it into\na spreadsheet by hand.\n\nh2. Details\n* *Trigger:* exporting the full member roster\n* *Symptom:* no bulk CSV export of the member roster is available in the admin panel\n* *Scope:* the admin team's annual training audit\n* *Workaround:* page through the member list and copy it out by hand\n* *Component:* exports\n\nh2. Priority: P2\nblocks a workflow but a workaround exists\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Ridgeway Manufacturing* -- Hank, 2026-06-22 ([call-013|transcripts/call-013.md])\n{quote}First: I need to get the full member roster out of the system. Everyone, all fields, one file \u2014 for our annual training audit. Right now my coordinator, Brenda, pages through the member list and copies it out chunk by chunk. It took her most of a morning last quarter, clicking through pages and pasting into a spreadsheet like it's 2004. Can you add an export button? One click, whole roster, CSV.{quote}\n_transcripts/call-013.md:26 (turn 22)_\n\nh2. Relates to PROJ-095\nalready shipped as PROJ-095 (Shipped): trigger (1.00) and symptom (0.88) both match [decided by structured]\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-013.md_",
+      "sources": [
+        {
+          "call_id": "call-013",
+          "account": "Ridgeway Manufacturing",
+          "date": "2026-06-22",
+          "reporter": "Hank",
+          "transcript_path": "transcripts/call-013.md",
+          "snippets": [
+            {
+              "turn_idx": 22,
+              "line_no": 26,
+              "speaker": "Hank",
+              "side": "EXTERNAL",
+              "text": "First: I need to get the full member roster out of the system. Everyone, all fields, one file \u2014 for our annual training audit. Right now my coordinator, Brenda, pages through the member list and copies it out chunk by chunk. It took her most of a morning last quarter, clicking through pages and pasting into a spreadsheet like it's 2004. Can you add an export button? One click, whole roster, CSV."
+            }
+          ]
+        }
+      ],
+      "dedup_target": "PROJ-095",
+      "dedup_rationale": "already shipped as PROJ-095 (Shipped): trigger (1.00) and symptom (0.88) both match [decided by structured]",
+      "near_misses": [],
+      "flags": []
+    },
+    {
+      "fingerprint": "a2bc8b65273abc84",
+      "outcome": "corroborate",
+      "type": "Bug",
+      "title": "Password-reset emails delayed up to thirty minutes during peak",
+      "component": "notifications-email",
+      "priority": "P3",
+      "severity": "trivial",
+      "priority_rationale": "no data-correctness, workflow-blocking or compliance impact identified",
+      "body": "h2. What's happening\nDuring a batch onboarding, twenty-three new hires requested password resets within ten\nminutes and several waited twenty to thirty minutes for the email. Nobody was\npermanently locked out and resets are instant off-peak. Specific to the reset email;\ninvite emails were fine.\n\nh2. Details\n* *Trigger:* requesting a password reset during morning peak when many requests cluster\n* *Symptom:* password reset emails are delayed up to thirty minutes during peak hours\n* *Scope:* users resetting passwords during a peak window\n* *Workaround:* stagger the onboarding emails so resets spread out\n* *Component:* notifications-email\n\nh2. Priority: P3\nno data-correctness, workflow-blocking or compliance impact identified\n\nh2. Evidence\n_Verbatim from the call recording. Quotes are read from the transcript file, not generated._\n\n*Juniper Media* -- Marcus, 2026-06-16 ([call-015|transcripts/call-015.md])\n{quote}We onboarded a batch of new hires two weeks ago \u2014 twenty-three people, all at once, first Monday of the month. And several of them told me the password-reset email just... didn't come. Or came way late.{quote}\n_transcripts/call-015.md:30 (turn 26)_\n{quote}That's the thing \u2014 not never. Late. One person said she requested it, went and got coffee, came back twenty-something minutes later, and it was sitting there. Another said his took like half an hour. A couple got it fine. It wasn't everybody.{quote}\n_transcripts/call-015.md:32 (turn 28)_\n{quote}Right. And I want to be careful \u2014 nobody was locked out permanently. Everybody got in eventually. It just made the kickoff look janky. I stood up in front of the new hires and said \"check your email for the reset link\" and then we all sat there for twenty minutes while nothing happened for half the room.{quote}\n_transcripts/call-015.md:36 (turn 32)_\n{quote}That's my hunch, yeah. It felt like peak-hours congestion. When I test it right now on my own account, boom, instant. But 9am Monday with everybody hammering it, that's when it dragged.{quote}\n_transcripts/call-015.md:42 (turn 38)_\n\nh2. Relates to PROJ-142\nduplicate of PROJ-142 (Open): trigger (0.71) and symptom (0.88) both match [decided by structured]\n\n----\n_Filed from call transcript by the call-signal triage pipeline after human review. Source of truth: transcripts/call-015.md_",
+      "sources": [
+        {
+          "call_id": "call-015",
+          "account": "Juniper Media",
+          "date": "2026-06-16",
+          "reporter": "Marcus",
+          "transcript_path": "transcripts/call-015.md",
+          "snippets": [
+            {
+              "turn_idx": 26,
+              "line_no": 30,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "We onboarded a batch of new hires two weeks ago \u2014 twenty-three people, all at once, first Monday of the month. And several of them told me the password-reset email just... didn't come. Or came way late."
+            },
+            {
+              "turn_idx": 28,
+              "line_no": 32,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "That's the thing \u2014 not never. Late. One person said she requested it, went and got coffee, came back twenty-something minutes later, and it was sitting there. Another said his took like half an hour. A couple got it fine. It wasn't everybody."
+            },
+            {
+              "turn_idx": 32,
+              "line_no": 36,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "Right. And I want to be careful \u2014 nobody was locked out permanently. Everybody got in eventually. It just made the kickoff look janky. I stood up in front of the new hires and said \"check your email for the reset link\" and then we all sat there for twenty minutes while nothing happened for half the room."
+            },
+            {
+              "turn_idx": 38,
+              "line_no": 42,
+              "speaker": "Marcus",
+              "side": "EXTERNAL",
+              "text": "That's my hunch, yeah. It felt like peak-hours congestion. When I test it right now on my own account, boom, instant. But 9am Monday with everybody hammering it, that's when it dragged."
+            }
+          ]
+        }
+      ],
+      "dedup_target": "PROJ-142",
+      "dedup_rationale": "duplicate of PROJ-142 (Open): trigger (0.71) and symptom (0.88) both match [decided by structured]",
+      "near_misses": [],
+      "flags": []
+    }
+  ],
+  "per_call_disposition": [
+    {
+      "call_id": "call-001",
+      "account": "Meridian Health",
+      "turns": 71,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P1] Usage dashboard 'active members' card contradicts its own pe"
+      ]
+    },
+    {
+      "call_id": "call-002",
+      "account": "Northwind Logistics",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-003",
+      "account": "Atlas Financial",
+      "turns": 75,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P0] Assign roles automatically from SAML group membership on eve"
+      ]
+    },
+    {
+      "call_id": "call-004",
+      "account": "Cedar Grove Schools",
+      "turns": 66,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "corroborate->PROJ-101 [P1] Scheduled report timestamps render seven hours ahead of the "
+      ]
+    },
+    {
+      "call_id": "call-005",
+      "account": "Vanta Retail",
+      "turns": 65,
+      "has_external": true,
+      "injection_turns": [
+        26
+      ],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "corroborate->PROJ-087 [P3] Duplicate webhook deliveries with no idempotency key to de-d"
+      ]
+    },
+    {
+      "call_id": "call-006",
+      "account": "Harborline Media",
+      "turns": 65,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P2] Search returns stale results for about ten minutes after a t"
+      ]
+    },
+    {
+      "call_id": "call-007",
+      "account": "unknown",
+      "turns": 67,
+      "has_external": false,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "skipped_internal_only",
+      "actions": []
+    },
+    {
+      "call_id": "call-008",
+      "account": "Northwind Logistics",
+      "turns": 65,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P3] Outbound email footer misspells the company name as 'BetterB",
+        "corroborate->PROJ-110 [P0] Android app crashes on launch after the latest update"
+      ]
+    },
+    {
+      "call_id": "call-009",
+      "account": "Lakeside Partners",
+      "turns": 67,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-010",
+      "account": "Atlas Financial",
+      "turns": 65,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P0] Audit-log export API for automated nightly SIEM ingestion",
+        "file-new [P2] Azure AD users hit an infinite redirect loop after a passwor"
+      ]
+    },
+    {
+      "call_id": "call-011",
+      "account": "Brightpath Insurance",
+      "turns": 66,
+      "has_external": true,
+      "injection_turns": [
+        20,
+        22
+      ],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P2] Profile links in notification emails truncate at apostrophes"
+      ]
+    },
+    {
+      "call_id": "call-012",
+      "account": "Gable Group",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P2] Search returns stale results for about ten minutes after a t"
+      ]
+    },
+    {
+      "call_id": "call-013",
+      "account": "Ridgeway Manufacturing",
+      "turns": 64,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P2] Session-completed webhook event carrying member ID and times",
+        "already-shipped->PROJ-095 [P2] Bulk CSV export of the full member roster"
+      ]
+    },
+    {
+      "call_id": "call-014",
+      "account": "Sunrise Hospitality",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P3] Deactivating a member mid-session strands the mobile app on "
+      ]
+    },
+    {
+      "call_id": "call-015",
+      "account": "Juniper Media",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "corroborate->PROJ-142 [P3] Password-reset emails delayed up to thirty minutes during pe"
+      ]
+    },
+    {
+      "call_id": "call-016",
+      "account": "Bexley & Sons",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-017",
+      "account": "Halewood Biotech",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-018",
+      "account": "Orchard Grocery Co-op",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-019",
+      "account": "Pinnacle Realty",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-020",
+      "account": "Stallard Freight",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-021",
+      "account": "Alderline Insurance",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-022",
+      "account": "Cavetto Restaurants",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-023",
+      "account": "Nordvik Shipping",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-024",
+      "account": "Ashwell Clinics",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-025",
+      "account": "unknown",
+      "turns": 60,
+      "has_external": false,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "skipped_internal_only",
+      "actions": []
+    },
+    {
+      "call_id": "call-026",
+      "account": "Berkfield University",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-027",
+      "account": "Tandem Sports",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-028",
+      "account": "Quill Publishing",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-029",
+      "account": "Hanamura Trading",
+      "turns": 70,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-030",
+      "account": "Vela Cosmetics",
+      "turns": 66,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-031",
+      "account": "Grafton Utilities",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-032",
+      "account": "Marlowe Consulting",
+      "turns": 63,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-033",
+      "account": "Beacon Charter Schools",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-034",
+      "account": "Pemrose Insurance",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P2] Fine, genuinely fine"
+      ]
+    },
+    {
+      "call_id": "call-035",
+      "account": "Glasshouse Studios",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-036",
+      "account": "Ferris & Lake Accounting",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-037",
+      "account": "Osprey Rail",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-038",
+      "account": "Ironbark Mining",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-039",
+      "account": "Loomis Daycare Group",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-040",
+      "account": "Palmetto Hotels",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-041",
+      "account": "Verity Accounting",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-042",
+      "account": "Meraki Tech",
+      "turns": 64,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-043",
+      "account": "Dunmore Textiles",
+      "turns": 64,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-044",
+      "account": "Southgate Retail",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-045",
+      "account": "Bellweather PR",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-046",
+      "account": "Chandler Logistics",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-047",
+      "account": "Kirkfield College",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-048",
+      "account": "Aurora Bakery Chain",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-049",
+      "account": "TrueNorth Bank",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-050",
+      "account": "Hollis & Partner",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-051",
+      "account": "Vantage Credit Union",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-052",
+      "account": "Kiwi Southern Freight",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-053",
+      "account": "Redgate Systems",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [
+        29
+      ],
+      "suppression_turns": [
+        29
+      ],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-054",
+      "account": "Milburn Foods",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-055",
+      "account": "Foxglove Pharma",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-056",
+      "account": "Trellis Gardens",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-057",
+      "account": "Pemberton Foods",
+      "turns": 66,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-058",
+      "account": "Quarry Heights REIT",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-059",
+      "account": "Sterling Mutual",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-060",
+      "account": "Harlow Health",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-061",
+      "account": "Novak Studios",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-062",
+      "account": "unknown",
+      "turns": 61,
+      "has_external": false,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "skipped_internal_only",
+      "actions": []
+    },
+    {
+      "call_id": "call-063",
+      "account": "Crescent Dental Group",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P2] Exactly that. And here's the thing"
+      ]
+    },
+    {
+      "call_id": "call-064",
+      "account": "Bluewater Marina",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-065",
+      "account": "Gardner Aerospace",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-066",
+      "account": "Pillar & Oak",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-067",
+      "account": "Fenwick Capital",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-068",
+      "account": "Sunhaven Resorts",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-069",
+      "account": "Corvus Media",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-070",
+      "account": "Brightside Retail",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-071",
+      "account": "Keystone Plumbing Co-op",
+      "turns": 67,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-072",
+      "account": "Copperline Energy",
+      "turns": 69,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P2] Exactly that. Stale for about ten minutes and then it sorts "
+      ]
+    },
+    {
+      "call_id": "call-073",
+      "account": "Falkner Law",
+      "turns": 64,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-074",
+      "account": "Windmark Insurance",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-075",
+      "account": "Maple Crest Bank",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-076",
+      "account": "Jasper Winery",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-077",
+      "account": "Holt Manufacturing",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-078",
+      "account": "Larkfield Media",
+      "turns": 63,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-079",
+      "account": "Cobalt Gyms",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-080",
+      "account": "Granite Peak Outfitters",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-081",
+      "account": "Silverline Events",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-082",
+      "account": "Twin Pines Farms",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-083",
+      "account": "Osier Textiles",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-084",
+      "account": "Umber & Co",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-085",
+      "account": "Cardinal Couriers",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-086",
+      "account": "Halcyon Robotics",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-087",
+      "account": "Petals & Stems Florists",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-088",
+      "account": "Beaumont Insurance",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P2] That's what's weird"
+      ]
+    },
+    {
+      "call_id": "call-089",
+      "account": "Riverstone Timber",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-090",
+      "account": "unknown",
+      "turns": 63,
+      "has_external": false,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "skipped_internal_only",
+      "actions": []
+    },
+    {
+      "call_id": "call-091",
+      "account": "Lumen Dance Academy",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-092",
+      "account": "Fairweather Solar",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-093",
+      "account": "Whitcomb Partners",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-094",
+      "account": "Golden Hour Photography",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-095",
+      "account": "Northgate Security",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-096",
+      "account": "Idlewild Camps",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-097",
+      "account": "Sablewood Furniture",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-098",
+      "account": "Kepler Tutoring",
+      "turns": 63,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-099",
+      "account": "Drummond Steel",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-100",
+      "account": "Elmswood Care",
+      "turns": 63,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-101",
+      "account": "Taro Logistics",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-102",
+      "account": "Basil & Sage Catering",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-103",
+      "account": "Winslow Group",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-104",
+      "account": "Harmon Optics",
+      "turns": 63,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-105",
+      "account": "Delft Imports",
+      "turns": 63,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-106",
+      "account": "unknown",
+      "turns": 60,
+      "has_external": false,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "skipped_internal_only",
+      "actions": []
+    },
+    {
+      "call_id": "call-107",
+      "account": "Bancroft Mills",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P2] CSV with a header row, comma-delimited, UTF-8, quoted string"
+      ]
+    },
+    {
+      "call_id": "call-108",
+      "account": "Coral Key Travel",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-109",
+      "account": "Prairie Rose Foods",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-110",
+      "account": "Standish & Gray",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-111",
+      "account": "Beacon Point Marina",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-112",
+      "account": "Onyx Apparel",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-113",
+      "account": "Thistle Brewing",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-114",
+      "account": "Galway Foods",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-115",
+      "account": "Crane & Whitfield",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-116",
+      "account": "Overton Academy",
+      "turns": 63,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-117",
+      "account": "Mistral Yachts",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-118",
+      "account": "Juniper & Finch",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-119",
+      "account": "Portside Medical",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-120",
+      "account": "Calloway Grain",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-121",
+      "account": "Hartley Insurance",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-122",
+      "account": "Vesper Finance",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-123",
+      "account": "Oakhaven Senior Living",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P3] Honestly? I think it's more shiny than real"
+      ]
+    },
+    {
+      "call_id": "call-124",
+      "account": "Pilgrim Coffee Roasters",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-125",
+      "account": "Ashcroft Partners",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [
+        25
+      ],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-126",
+      "account": "Bloomfield Nurseries",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-127",
+      "account": "Sterlington Legal",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-128",
+      "account": "Kestrel Airlines",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-129",
+      "account": "Danfield Appliances",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-130",
+      "account": "Ryecroft Analytics",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-131",
+      "account": "Montclair Cosmetics",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-132",
+      "account": "Fairbanks Consulting",
+      "turns": 63,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": [
+        "file-new [P3] Right. And what I'd love",
+        "file-new [P3] Exactly. And here's the part that bugs me"
+      ]
+    },
+    {
+      "call_id": "call-133",
+      "account": "Tundra Outfitters",
+      "turns": 62,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-134",
+      "account": "Sequoia Ventures",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-135",
+      "account": "Bristlecone Labs",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-136",
+      "account": "Portman Grand Hotels",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-137",
+      "account": "unknown",
+      "turns": 60,
+      "has_external": false,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "skipped_internal_only",
+      "actions": []
+    },
+    {
+      "call_id": "call-138",
+      "account": "Gilded Lily Events",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-139",
+      "account": "Andes Mining Co",
+      "turns": 60,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    },
+    {
+      "call_id": "call-140",
+      "account": "Harvest Moon Markets",
+      "turns": 61,
+      "has_external": true,
+      "injection_turns": [],
+      "suppression_turns": [],
+      "status": "processed",
+      "actions": []
+    }
+  ]
+}
