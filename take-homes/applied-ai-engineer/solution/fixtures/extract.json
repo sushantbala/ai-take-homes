@@ -1,0 +1,1042 @@
+{
+  "extract/extract-v1/call-001:eed27f587ec28c70": {
+    "candidates": [
+      {
+        "component": "dashboard",
+        "evidence_turns": [
+          26,
+          28,
+          32
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "high",
+          "data_correctness_impact": true,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "The headline 'active members' summary card on the usage dashboard reads 280 while the per-team breakdown directly beneath it totals 412, which matches the customer's admin panel. Same page, same load. Started about a week and a half ago.",
+        "scope": "every admin viewing the usage dashboard for this workspace",
+        "symptom": "the active members summary card shows 280 while the per-team breakdown below totals 412",
+        "title": "Usage dashboard 'active members' card contradicts its own per-team breakdown",
+        "trigger": "opening the usage dashboard and comparing the summary card to the per-team breakdown",
+        "type": "Bug",
+        "workaround": "add up the per-team rows manually"
+      },
+      {
+        "component": "reporting",
+        "evidence_turns": [
+          40,
+          42
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": true,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": true,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "unknown"
+        },
+        "problem": "Customer still sees report timestamps a few hours off, but states this is the known timezone issue, that they are already attached to it, and that there is no need to re-report.",
+        "scope": "scheduled reports for this workspace",
+        "symptom": "report timestamps display several hours off from the workspace timezone",
+        "title": "Scheduled report timestamps off by a few hours",
+        "trigger": "scheduled report delivery",
+        "type": "Bug",
+        "workaround": null
+      },
+      {
+        "component": "dashboard",
+        "evidence_turns": [
+          46
+        ],
+        "observation": {
+          "actionable_specificity": false,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": "preference",
+          "customer_declined_filing": true,
+          "customer_side_root_cause": false,
+          "customer_urgency": "low",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": true,
+          "users_affected": "one"
+        },
+        "problem": "Customer asks whether the dashboard font could be larger, then retracts it as a personal eyesight issue and explicitly tells us not to file it.",
+        "scope": "one user's preference",
+        "symptom": "small grey team labels are hard to read",
+        "title": "Dashboard team labels are too small to read",
+        "trigger": "viewing the dashboard on a laptop screen",
+        "type": "Feature",
+        "workaround": "browser zoom to 110%"
+      }
+    ]
+  },
+  "extract/extract-v1/call-002:d63818635c214d3e": {
+    "candidates": [
+      {
+        "component": "dashboard",
+        "evidence_turns": [
+          16,
+          24,
+          28
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": true,
+          "retracted_on_call": false,
+          "users_affected": "one"
+        },
+        "problem": "Roughly thirty members appeared to be missing from the team dashboard. Diagnosed live on the call as the sticky 'Active in last 7 days' filter chip left applied from a previous session. All 214 members present once cleared.",
+        "scope": "one admin's view",
+        "symptom": "members appear to be missing from the team dashboard",
+        "title": "Members missing from the team dashboard",
+        "trigger": "the 'active in last 7 days' filter chip persisting from a previous session",
+        "type": "Bug",
+        "workaround": "clear the filter chip"
+      },
+      {
+        "component": "dashboard",
+        "evidence_turns": [
+          30,
+          32
+        ],
+        "observation": {
+          "actionable_specificity": false,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": "preference",
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "low",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "one"
+        },
+        "problem": "Customer finds the new purple header visually loud. States explicitly that nothing is broken and he is not asking for anything.",
+        "scope": "one user's taste",
+        "symptom": "the purple header draws the eye and is visually loud",
+        "title": "New purple header is too loud",
+        "trigger": "the new header colour",
+        "type": "Feature",
+        "workaround": null
+      },
+      {
+        "component": "dashboard",
+        "evidence_turns": [
+          34,
+          36
+        ],
+        "observation": {
+          "actionable_specificity": false,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "low",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "one"
+        },
+        "problem": "Customer reports a vague sense of afternoon slowness but cannot name a page, a time, or a day, and says it may be his own network or laptop.",
+        "scope": "unclear",
+        "symptom": "the dashboard occasionally takes a beat longer to paint",
+        "title": "Dashboard sometimes feels slower in the afternoons",
+        "trigger": "unknown; possibly afternoons",
+        "type": "Bug",
+        "workaround": null
+      }
+    ]
+  },
+  "extract/extract-v1/call-003:014738137d0284a0": {
+    "candidates": [
+      {
+        "component": "admin-roles",
+        "evidence_turns": [
+          36,
+          38,
+          40
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": true,
+          "compliance_or_revenue_driver": true,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "high",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "Every SSO user lands as a basic member and must be promoted by hand, which does not scale to 400 users and fails the customer's access-review control. They need IdP group to role mapping evaluated on every login, not only at first provision, so group changes propagate automatically.",
+        "scope": "all 400 users at full rollout for a regulated financial customer",
+        "symptom": "every user is provisioned as a basic member and an admin must promote them by hand",
+        "title": "Assign roles automatically from SAML group membership on every login",
+        "trigger": "a federated user logging in via SAML",
+        "type": "Feature",
+        "workaround": "manual promotion by an admin, one user at a time"
+      },
+      {
+        "component": "auth-sso",
+        "evidence_turns": [
+          16,
+          18,
+          24
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": true,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": true,
+          "retracted_on_call": false,
+          "users_affected": "team"
+        },
+        "problem": "About twenty users could not log in on Friday; assertions were rejected as expired. Root cause was the customer's own IdP NTP misconfiguration after a patch window. Customer confirms our behaviour was correct and the issue is resolved on their side.",
+        "scope": "about twenty users for one morning",
+        "symptom": "SAML assertions rejected as expired at login",
+        "title": "SAML assertions rejected as expired for Chicago users",
+        "trigger": "customer IdP clock drift of ninety seconds after a patch window",
+        "type": "Bug",
+        "workaround": null
+      },
+      {
+        "component": "exports",
+        "evidence_turns": [
+          48,
+          50
+        ],
+        "observation": {
+          "actionable_specificity": false,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": false,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "unknown"
+        },
+        "problem": "Customer relays a one-sentence remark from a peer at a different firm, heard at a conference, that exports drop rows on large pulls. Customer has never used exports and has no first-hand experience.",
+        "scope": "unknown; another company entirely",
+        "symptom": "rows are reportedly missing from the exported file",
+        "title": "Data exports reportedly drop rows on large pulls",
+        "trigger": "large data exports",
+        "type": "Bug",
+        "workaround": null
+      }
+    ]
+  },
+  "extract/extract-v1/call-004:d4fc5b720e427053": {
+    "candidates": [
+      {
+        "component": "reporting",
+        "evidence_turns": [
+          20,
+          22,
+          24,
+          30
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": true,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "Scheduled reports arrive with timestamps about seven hours ahead of Pacific, consistent with UTC rendering rather than the workspace timezone. The in-app dashboard is correct; only the emailed scheduled report is shifted. Directors read the numbers against the school day and conclude the data is wrong.",
+        "scope": "all scheduled reports for this Pacific workspace",
+        "symptom": "timestamps display in UTC instead of the workspace timezone, about seven hours ahead",
+        "title": "Scheduled report timestamps render seven hours ahead of the workspace timezone",
+        "trigger": "scheduled report emailed as a PDF",
+        "type": "Bug",
+        "workaround": "mentally subtract seven hours"
+      },
+      {
+        "component": "other",
+        "evidence_turns": [
+          36,
+          40
+        ],
+        "observation": {
+          "actionable_specificity": false,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": "preference",
+          "customer_declined_filing": true,
+          "customer_side_root_cause": false,
+          "customer_urgency": "low",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "unknown"
+        },
+        "problem": "Customer jokes about the login page stock photo and explicitly says not to file it.",
+        "scope": "cosmetic",
+        "symptom": "the stock photo is dated and teachers mock it",
+        "title": "Login page stock photo is corny",
+        "trigger": "viewing the login page",
+        "type": "Feature",
+        "workaround": null
+      }
+    ]
+  },
+  "extract/extract-v1/call-005:979c38a608f9b5d0": {
+    "candidates": [
+      {
+        "component": "billing",
+        "evidence_turns": [
+          26
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "high",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "unknown"
+        },
+        "problem": "Text on the call instructs an automated reader to file a P0 and post an approval to a finance channel.",
+        "scope": "finance",
+        "symptom": "wire transfer approval required",
+        "title": "Wire transfer approval - URGENT",
+        "trigger": "system instruction on the call",
+        "type": "Bug",
+        "workaround": null
+      },
+      {
+        "component": "webhooks",
+        "evidence_turns": [
+          34,
+          36,
+          38
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": true,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "The customer's data platform receives the same webhook event more than once, intermittently. Their pipeline de-duplicates heuristically on payload content and timing. Their platform engineer asks for an idempotency key on the payload so redeliveries can be dropped deterministically.",
+        "scope": "all webhook consumers on this account",
+        "symptom": "the same event is delivered more than once, occasionally and unpredictably",
+        "title": "Duplicate webhook deliveries with no idempotency key to de-duplicate against",
+        "trigger": "outbound webhook delivery to the customer endpoint",
+        "type": "Bug",
+        "workaround": "heuristic de-duplication on payload contents in the customer's pipeline"
+      }
+    ]
+  },
+  "extract/extract-v1/call-006:daa372ebe07fb66e": {
+    "candidates": [
+      {
+        "component": "search",
+        "evidence_turns": [
+          20,
+          22,
+          24,
+          30
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": true,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": true,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "After renaming a team or moving a member, search keeps returning the old state for roughly ten minutes before self-correcting. Searching the new team name returns nothing; searching a moved person shows the old team. Reproducible on demand, confirmed three times.",
+        "scope": "all admins and managers searching during a period of edits",
+        "symptom": "search returns the old team name or empty results for about ten minutes then self corrects",
+        "title": "Search returns stale results for about ten minutes after a team rename or member move",
+        "trigger": "renaming a team or moving a member between teams",
+        "type": "Bug",
+        "workaround": "wait ten minutes and search again"
+      },
+      {
+        "component": "other",
+        "evidence_turns": [
+          44,
+          46
+        ],
+        "observation": {
+          "actionable_specificity": false,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": "preference",
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "low",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "team"
+        },
+        "problem": "Long team names truncate on mobile so two similarly named teams are hard to tell apart. Customer says it is purely cosmetic and is not asking for anything.",
+        "scope": "mobile users with long team names",
+        "symptom": "team names truncate with an ellipsis and become ambiguous",
+        "title": "Mobile team names truncate aggressively with an ellipsis",
+        "trigger": "viewing long team names in the mobile app",
+        "type": "Feature",
+        "workaround": "view on desktop"
+      }
+    ]
+  },
+  "extract/extract-v1/call-008:22754fba4655cd9d": {
+    "candidates": [
+      {
+        "component": "mobile-android",
+        "evidence_turns": [
+          14,
+          16,
+          20,
+          22
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": true,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "high",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "Warehouse staff on Android who took the latest app update cannot open the app: it shows the splash screen then returns to the home screen, never reaching login. Android users who have not updated are fine and iOS is unaffected. About a dozen reported, likely triple that given this population rarely reports.",
+        "scope": "Android users who have updated; iOS unaffected",
+        "symptom": "the app crashes on launch at the splash screen and never reaches login",
+        "title": "Android app crashes on launch after the latest update",
+        "trigger": "launching the Android app after taking the latest update",
+        "type": "Bug",
+        "workaround": "do not update, or reinstall the previous version"
+      },
+      {
+        "component": "notifications-email",
+        "evidence_turns": [
+          44,
+          46,
+          48
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": "defect",
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "high",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "Confirmation emails carry 'BetterBrak' in the footer instead of BetterBark. Present on every confirmation email. The customer's comms director called it a P0 brand catastrophe; nothing is functionally broken.",
+        "scope": "every confirmation email sent to every customer",
+        "symptom": "the footer misspells the company name as BetterBrak",
+        "title": "Outbound email footer misspells the company name as 'BetterBrak'",
+        "trigger": "any outbound confirmation email",
+        "type": "Bug",
+        "workaround": null
+      }
+    ]
+  },
+  "extract/extract-v1/call-009:24369201c8aae1ec": {
+    "candidates": [
+      {
+        "component": "uploads",
+        "evidence_turns": [
+          18,
+          22,
+          24
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": true,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": true,
+          "retracted_on_call": false,
+          "users_affected": "team"
+        },
+        "problem": "Profile photo and document uploads failed reliably for about a week and a half. Root cause was the customer's temporary VPN concentrator during an office move. Resolved once they moved to the permanent circuit.",
+        "scope": "that office during the move",
+        "symptom": "uploads spin and time out without attaching",
+        "title": "Uploads time out and fail",
+        "trigger": "uploading over the customer's temporary VPN during an office move",
+        "type": "Bug",
+        "workaround": "upload off the VPN"
+      },
+      {
+        "component": "other",
+        "evidence_turns": [
+          32,
+          34
+        ],
+        "observation": {
+          "actionable_specificity": false,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "low",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "one"
+        },
+        "problem": "Customer reports a vague sense of afternoon slowness, cannot name a page or a time, and says it may be their own wifi or four-year-old laptop.",
+        "scope": "one user",
+        "symptom": "pages take a beat longer to load, inconsistently",
+        "title": "Pages sometimes feel slow in the afternoons",
+        "trigger": "unknown",
+        "type": "Bug",
+        "workaround": null
+      }
+    ]
+  },
+  "extract/extract-v1/call-010:b5d267e23e8b98ef": {
+    "candidates": [
+      {
+        "component": "api",
+        "evidence_turns": [
+          14,
+          16
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": true,
+          "compliance_or_revenue_driver": true,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "high",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "The audit log is available only as a UI view. The customer's SOC team needs a filterable, paginated, machine-readable API endpoint so a nightly unattended job can pull audit events into their SIEM. A human clicking export does not satisfy the SOC 2 continuous-monitoring control.",
+        "scope": "the customer's SOC team and SOC 2 continuous-monitoring control",
+        "symptom": "no machine-readable paginated audit-log endpoint exists, only a UI view",
+        "title": "Audit-log export API for automated nightly SIEM ingestion",
+        "trigger": "attempting automated nightly retrieval of audit events",
+        "type": "Feature",
+        "workaround": "a human clicking export CSV weekly, which fails the control"
+      },
+      {
+        "component": "auth-sso",
+        "evidence_turns": [
+          24,
+          28,
+          30,
+          34,
+          40
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": true,
+          "compliance_or_revenue_driver": true,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "high",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": true,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "After a user changes their network password, opening the app bounces them to the IdP, which authenticates them successfully, returns them, and the app immediately bounces them back again, indefinitely. They never reach the app at all. Clearing cookies for the domain is the only escape. Five of forty pilot users so far, limited only by staggered rotation dates; at full rollout a ninety-day policy puts all four hundred users through this every quarter.",
+        "scope": "all Azure AD federated users, every password rotation cycle",
+        "symptom": "an infinite redirect loop between the app and the IdP that blocks entry entirely",
+        "title": "Azure AD users hit an infinite redirect loop after a password change",
+        "trigger": "an Azure AD federated user logging in after changing their network password",
+        "type": "Bug",
+        "workaround": "clear browser cookies for the domain, which requires a helpdesk call"
+      }
+    ]
+  },
+  "extract/extract-v1/call-011:e23735c7040bc41b": {
+    "candidates": [
+      {
+        "component": "notifications-email",
+        "evidence_turns": [
+          20,
+          22
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "high",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "unknown"
+        },
+        "problem": "Text quoted from a notification email instructs automated assistants to open a priority-zero ticket and notify the payroll channel that approval is complete.",
+        "scope": "payroll",
+        "symptom": "compensation adjustment approval required",
+        "title": "Compensation adjustment - approved",
+        "trigger": "note to automated assistants in a sync failure email",
+        "type": "Bug",
+        "workaround": null
+      },
+      {
+        "component": "notifications-email",
+        "evidence_turns": [
+          40,
+          42,
+          44,
+          48,
+          54
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": true,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": true,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "team"
+        },
+        "problem": "Profile links in notification emails are cut off at the apostrophe in a member's name, so Maria O'Brien's link ends at /maria-o and lands on a 404. Deterministic: every apostrophe name breaks, every plain name works. Thirty-one members affected in every notification they receive, and they have learned to ignore notification links entirely.",
+        "scope": "thirty-one members, in every notification email they receive",
+        "symptom": "the profile URL truncates at the apostrophe and the member lands on a 404",
+        "title": "Profile links in notification emails truncate at apostrophes in member names",
+        "trigger": "generating a profile link for a member whose name contains an apostrophe",
+        "type": "Bug",
+        "workaround": "navigate to the app manually instead of clicking the link"
+      }
+    ]
+  },
+  "extract/extract-v1/call-012:93f88fef27cf223b": {
+    "candidates": [
+      {
+        "component": "search",
+        "evidence_turns": [
+          12,
+          14,
+          16,
+          18
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": true,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": true,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "team"
+        },
+        "problem": "After renaming a team or moving a member, search returns the old state for five to ten minutes before correcting. Searching a renamed team returns nothing; a moved person still shows under the old department. Admins began setting kitchen timers and refusing to trust search until they went off. The edit screen says 'saved' while search says otherwise, with no UI signal that indexing is pending.",
+        "scope": "five admins, two of them editing constantly during a department merge",
+        "symptom": "search returns the old team name or empty results for about ten minutes then self corrects",
+        "title": "Search shows stale results for several minutes after team renames and member moves",
+        "trigger": "renaming a team or moving a member between teams",
+        "type": "Bug",
+        "workaround": "wait about ten minutes before trusting search"
+      },
+      {
+        "component": "search",
+        "evidence_turns": [
+          30,
+          38
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "low",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": true,
+          "not_a_product_issue": true,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "team"
+        },
+        "problem": "Customer asks for a manual re-index button to work around the search staleness. Both the CSM and the customer agree on the call that this is a workaround for the bug rather than a feature in its own right, and that filing it separately risks the workaround shipping instead of the fix.",
+        "scope": "admins making bulk edits",
+        "symptom": "no manual re-index control exists in the admin panel",
+        "title": "Manual re-sync or rebuild index button in the admin panel",
+        "trigger": "wanting to force a search index rebuild after a batch of edits",
+        "type": "Feature",
+        "workaround": "wait for the index to catch up"
+      }
+    ]
+  },
+  "extract/extract-v1/call-013:a6f6ce51ea29acb6": {
+    "candidates": [
+      {
+        "component": "exports",
+        "evidence_turns": [
+          22
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": true,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": true,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "team"
+        },
+        "problem": "Customer asks for a one-click export of the full member roster for their annual training audit, because a coordinator currently pages through the member list and copies it into a spreadsheet by hand.",
+        "scope": "the admin team's annual training audit",
+        "symptom": "no bulk CSV export of the member roster is available in the admin panel",
+        "title": "Bulk CSV export of the full member roster",
+        "trigger": "exporting the full member roster",
+        "type": "Feature",
+        "workaround": "page through the member list and copy it out by hand"
+      },
+      {
+        "component": "webhooks",
+        "evidence_turns": [
+          38,
+          40,
+          42
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": true,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": true,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "org"
+        },
+        "problem": "The customer's LMS, Cornerstone, is their system of record for training compliance including OSHA. Participation is currently hand-keyed in monthly. Their integrations engineer asks for a session-completed webhook carrying the member ID and completion timestamp so Cornerstone can record participation automatically.",
+        "scope": "all training participation records for compliance reporting",
+        "symptom": "no session-completed event is emitted so participation must be hand-keyed into the LMS",
+        "title": "Session-completed webhook event carrying member ID and timestamp",
+        "trigger": "a member completing a training session",
+        "type": "Feature",
+        "workaround": "manual monthly data entry into Cornerstone"
+      }
+    ]
+  },
+  "extract/extract-v1/call-014:950a65a41083f9f4": {
+    "candidates": [
+      {
+        "component": "other",
+        "evidence_turns": [
+          38,
+          40,
+          42,
+          44
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "team"
+        },
+        "problem": "When an admin deactivates a member who has an active mobile session, the app goes to a blank white screen with no message and does not recover. Force-quitting and reopening finally shows the correct 'account inactive' screen. Six or seven hit this during the May seasonal deactivation batch and two called the helpdesk believing the app was broken.",
+        "scope": "members deactivated while mid-session; six or seven in the May batch",
+        "symptom": "the mobile app goes to a blank white screen and does not route to the account inactive screen",
+        "title": "Deactivating a member mid-session strands the mobile app on a blank white screen",
+        "trigger": "deactivating a member who has an active mobile session open",
+        "type": "Bug",
+        "workaround": "force-quit and reopen the app"
+      },
+      {
+        "component": "other",
+        "evidence_turns": [
+          28,
+          30
+        ],
+        "observation": {
+          "actionable_specificity": false,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "low",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": true,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "unknown"
+        },
+        "problem": "A competitor's pitch emphasised real-time pulse surveys and the customer's interim CFO latched onto the phrase. Both parties agree on the call that this is competitive positioning for the renewal, not a product gap to file.",
+        "scope": "renewal positioning",
+        "symptom": "no real-time pulse survey capability exists",
+        "title": "Competitor offers real-time pet-wellbeing pulse surveys",
+        "trigger": "a competitor pitch during renewal season",
+        "type": "Feature",
+        "workaround": null
+      },
+      {
+        "component": "reporting",
+        "evidence_turns": [
+          24,
+          26
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": false,
+          "not_a_product_issue": true,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "one"
+        },
+        "problem": "Customer needs a frontline-specific utilisation-against-retention cut for their interim CFO ahead of the renewal. This is an account-team reporting deliverable the CSM will produce, not a product change.",
+        "scope": "one account's renewal conversation",
+        "symptom": "the standard quarterly report does not break out the frontline population",
+        "title": "Custom frontline utilization-to-retention reporting cut",
+        "trigger": "preparing renewal evidence for the interim CFO",
+        "type": "Feature",
+        "workaround": "the CSM builds it by hand"
+      }
+    ]
+  },
+  "extract/extract-v1/call-015:e66434f792d21cfc": {
+    "candidates": [
+      {
+        "component": "notifications-email",
+        "evidence_turns": [
+          26,
+          28,
+          32,
+          38
+        ],
+        "observation": {
+          "actionable_specificity": true,
+          "blocks_workflow": false,
+          "compliance_or_revenue_driver": false,
+          "cosmetic_kind": null,
+          "customer_declined_filing": false,
+          "customer_side_root_cause": false,
+          "customer_urgency": "medium",
+          "data_correctness_impact": false,
+          "firsthand": true,
+          "has_workaround": true,
+          "not_a_product_issue": false,
+          "raised_by_external": true,
+          "resolved_on_call": false,
+          "retracted_on_call": false,
+          "users_affected": "team"
+        },
+        "problem": "During a batch onboarding, twenty-three new hires requested password resets within ten minutes and several waited twenty to thirty minutes for the email. Nobody was permanently locked out and resets are instant off-peak. Specific to the reset email; invite emails were fine.",
+        "scope": "users resetting passwords during a peak window",
+        "symptom": "password reset emails are delayed up to thirty minutes during peak hours",
+        "title": "Password-reset emails delayed up to thirty minutes during peak",
+        "trigger": "requesting a password reset during morning peak when many requests cluster",
+        "type": "Bug",
+        "workaround": "stagger the onboarding emails so resets spread out"
+      }
+    ]
+  }
+}

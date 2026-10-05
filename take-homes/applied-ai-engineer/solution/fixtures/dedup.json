@@ -1,0 +1,38 @@
+{
+  "dedup/dedup-v1/call-005:1142ed602851ae20:PROJ-087": {
+    "confidence": 0.93,
+    "discriminator": "both describe the same outbound webhook delivered more than once, and both ask for an idempotency key as the fix",
+    "reason": "Identical trigger (outbound webhook delivery) and identical symptom (duplicate delivery of the same event); the wording differs but the defect does not.",
+    "same": true
+  },
+  "dedup/dedup-v1/call-005:3b7a76e32818db83:PROJ-087": {
+    "confidence": 0.93,
+    "discriminator": "both describe the same outbound webhook delivered more than once, and both ask for an idempotency key as the fix",
+    "reason": "Identical trigger (outbound webhook delivery) and identical symptom (duplicate delivery of the same event); the wording differs but the defect does not.",
+    "same": true
+  },
+  "dedup/dedup-v1/call-008:0062a7fd5226a71b:PROJ-110": {
+    "confidence": 0.95,
+    "discriminator": "Android-only crash on launch correlated with the same app update, iOS unaffected in both reports",
+    "reason": "Same trigger (launching the Android app after the update) and same observable failure (crash before reaching login); a second account on the tracked 4.2 crash.",
+    "same": true
+  },
+  "dedup/dedup-v1/call-008:188e03f154c1f324:PROJ-110": {
+    "confidence": 0.95,
+    "discriminator": "Android-only crash on launch correlated with the same app update, iOS unaffected in both reports",
+    "reason": "Same trigger (launching the Android app after the update) and same observable failure (crash before reaching login); a second account on the tracked 4.2 crash.",
+    "same": true
+  },
+  "dedup/dedup-v1/call-011:3d209f5697e5c207:PROJ-142": {
+    "confidence": 0.97,
+    "discriminator": "PROJ-142 is a delivery delay under load; this is a URL-escaping defect that truncates a link, and it is deterministic rather than load-dependent",
+    "reason": "Different trigger and different symptom: one is a queueing delay, the other is a malformed link that is broken every single time.",
+    "same": false
+  },
+  "dedup/dedup-v1/call-011:77739f30705da5d3:PROJ-142": {
+    "confidence": 0.97,
+    "discriminator": "PROJ-142 is a delivery delay under load; this is a URL-escaping defect that truncates a link, and it is deterministic rather than load-dependent",
+    "reason": "Different trigger and different symptom: one is a queueing delay, the other is a malformed link that is broken every single time.",
+    "same": false
+  }
+}

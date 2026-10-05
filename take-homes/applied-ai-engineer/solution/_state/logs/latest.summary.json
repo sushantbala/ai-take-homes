@@ -1,0 +1,31 @@
+{
+  "run_id": "run-20261003T205200-426c00",
+  "transcripts_seen": 15,
+  "transcripts_processed": 14,
+  "transcripts_skipped_internal": 1,
+  "transcripts_unchanged": 0,
+  "transcripts_errored": 0,
+  "error_rate": 0.0,
+  "candidates_extracted": 31,
+  "candidates_dropped": 16,
+  "candidates_per_call": 2.214,
+  "actions_file_new": 9,
+  "actions_corroborate": 4,
+  "actions_already_shipped": 1,
+  "actions_suppressed_idempotent": 0,
+  "file_rate": 0.6429,
+  "drop_reasons": {
+    "cosmetic_preference": 2,
+    "customer_declined_filing": 2,
+    "hearsay": 1,
+    "injection_quarantined": 2,
+    "internal_only_call": 1,
+    "not_a_product_issue": 3,
+    "resolved_on_call": 3,
+    "retracted_on_call": 1,
+    "unactionable_vague": 2
+  },
+  "health_alerts": [
+    "HIGH: 64.3% of calls produced a new ticket, above 60.0% -- gates may have stopped filtering"
+  ]
+}
